@@ -211,7 +211,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         >
           {/* <AnalyticsPageView /> */}
           <TooltipProvider delayDuration={0}>
-            <main className="relative flex min-h-screen flex-col">
+            <main className="relative flex min-h-screen flex-col bg-gradient-to-bl from-neutral-800 via-neutral-900 to-black">
               <div className="flex-1 grow">{children}</div>
             </main>
           </TooltipProvider>
