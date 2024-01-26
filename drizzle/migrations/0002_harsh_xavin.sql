@@ -1,0 +1,1 @@
+ALTER TABLE "books" ALTER COLUMN "version" SET DATA TYPE bigint;
