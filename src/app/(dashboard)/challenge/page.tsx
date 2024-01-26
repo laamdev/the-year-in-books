@@ -13,8 +13,9 @@ import { CreateChallengeForm } from "@/components/forms/create-challenge-form"
 import { MaxWidthWrapper } from "@/components/max-width-wrapper"
 import { Heading } from "@/components/shared/heading"
 import { Subheading } from "@/components/shared/subheading"
+import { BookGridSkeleton } from "@/components/skeletons/book-grid-skeleton"
 import { Badge } from "@/components/ui/badge"
-import { Button, buttonVariants } from "@/components/ui/button"
+import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { Book } from "@/db/schema"
@@ -131,20 +132,14 @@ export default async function ChallengePage() {
 
             <div className="mt-20">
               <Subheading>{`Latest Books`}</Subheading>
-              <BookGrid>
-                {challenge.success.books.slice(0, 5).map((book) => (
-                  <BookCard key={book.version} book={book} />
-                ))}
-              </BookGrid>
 
-              {/* <div className="mt-5">
-                <Link
-                  href="/library"
-                  className={buttonVariants({ className: "" })}
-                >
-                  {`View full library`}
-                </Link>
-              </div> */}
+              <Suspense fallback={<BookGridSkeleton />}>
+                <BookGrid>
+                  {challenge.success.books.slice(0, 5).map((book) => (
+                    <BookCard key={book.version} book={book} />
+                  ))}
+                </BookGrid>
+              </Suspense>
             </div>
           </Suspense>
         </SignedIn>

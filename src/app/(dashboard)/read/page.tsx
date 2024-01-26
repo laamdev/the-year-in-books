@@ -7,6 +7,7 @@ import { BookCarousel } from "@/components/book-carousel"
 import { BookGrid } from "@/components/book-grid"
 import { MaxWidthWrapper } from "@/components/max-width-wrapper"
 import { Heading } from "@/components/shared/heading"
+import { BookGridSkeleton } from "@/components/skeletons/book-grid-skeleton"
 import { Badge } from "@/components/ui/badge"
 
 export default async function ReadPage() {
@@ -25,7 +26,7 @@ export default async function ReadPage() {
           <Heading>{`Read`}</Heading>
         </div>
 
-        <Suspense fallback={null}>
+        <Suspense fallback={<BookGridSkeleton />}>
           {readBooksCount > 0 && <BookCarousel books={readBooks} />}
           {readBooksCount === 0 && (
             <div className="mt-10">

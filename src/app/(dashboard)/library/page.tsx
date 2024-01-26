@@ -6,6 +6,7 @@ import { BookCard } from "@/components/book-card"
 import { BookGrid } from "@/components/book-grid"
 import { MaxWidthWrapper } from "@/components/max-width-wrapper"
 import { Heading } from "@/components/shared/heading"
+import { BookGridSkeleton } from "@/components/skeletons/book-grid-skeleton"
 import { Badge } from "@/components/ui/badge"
 
 export default async function LibraryPage() {
@@ -21,7 +22,7 @@ export default async function LibraryPage() {
           </div>
           <Heading>{`Library`}</Heading>
         </div>
-        <Suspense fallback={null}>
+        <Suspense fallback={<BookGridSkeleton />}>
           <BookGrid>
             {challenge.success.books.map((book) => (
               <BookCard book={book} />

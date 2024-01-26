@@ -1,5 +1,4 @@
 import { currentUser } from "@clerk/nextjs"
-import { Suspense } from "react"
 
 import { MaxWidthWrapper } from "@/components/max-width-wrapper"
 import { Heading } from "@/components/shared/heading"
@@ -15,8 +14,6 @@ export default async function ReadPage() {
   return (
     <MaxWidthWrapper>
       <Heading>{`${user?.firstName} ${user?.lastName}'s Profile`}</Heading>
-
-      <Suspense fallback={null}></Suspense>
     </MaxWidthWrapper>
   )
   //   }

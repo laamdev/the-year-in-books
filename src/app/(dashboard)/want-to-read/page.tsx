@@ -4,6 +4,7 @@ import { getChallenge } from "@/app/_actions"
 import { BookCarousel } from "@/components/book-carousel"
 import { MaxWidthWrapper } from "@/components/max-width-wrapper"
 import { Heading } from "@/components/shared/heading"
+import { BookGridSkeleton } from "@/components/skeletons/book-grid-skeleton"
 import { Badge } from "@/components/ui/badge"
 
 export default async function ReadPage() {
@@ -24,7 +25,7 @@ export default async function ReadPage() {
           <Heading>{`Want to Read`}</Heading>
         </div>
 
-        <Suspense fallback={null}>
+        <Suspense fallback={<BookGridSkeleton />}>
           {wantToReadBooksCount > 0 && <BookCarousel books={wantToReadBooks} />}
           {wantToReadBooksCount === 0 && (
             <div className="mt-10">
