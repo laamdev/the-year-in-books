@@ -1,21 +1,24 @@
 import { CheckCircle2Icon } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 
 import { BookActionMenu } from "@/components/book-action-menu"
 import { Book } from "@/db/schema"
 
-import { Skeleton } from "./ui/skeleton"
-
 export const BookCard = ({ book }: { book: Book }) => {
   return (
-    <div key={book.version} className="relative">
-      <div className="relative aspect-[3/5] rounded-md shadow">
+    <Link href="/" key={book.version} className="group ">
+      <div className="relative aspect-[3/5] h-min overflow-hidden rounded-md shadow ">
         <Image
           src={book.cover}
           alt={book.title}
           fill
-          className="rounded-md object-cover object-center"
+          className="tw-transition rounded-md object-cover object-center group-hover:scale-105"
         />
+
+        {book.is_read && (
+          <CheckCircle2Icon className="absolute right-1.5 top-1.5 z-50 size-8 fill-red-600 stroke-black" />
+        )}
       </div>
       <div className="mt-1 flex items-start justify-between">
         <div className="mt-2.5">
@@ -28,9 +31,6 @@ export const BookCard = ({ book }: { book: Book }) => {
         </div>
         <BookActionMenu book={book} />
       </div>
-      {book.is_read && (
-        <CheckCircle2Icon className="absolute right-1.5 top-1.5 z-50 size-8 fill-red-600 stroke-black" />
-      )}
-    </div>
+    </Link>
   )
 }
