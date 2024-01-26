@@ -30,6 +30,10 @@ export const EditChallengeFormSchema = z.object({
     .number()
     .min(1, "At least one book is required.")
     .max(100, "You can only max 100 books to your challenge."),
+  books_in_library_count: z.coerce
+    .number()
+    .min(1, "At least one book is required.")
+    .max(100, "You can only max 100 books to your challenge."),
 })
 
 export const DeleteChallengeFormSchema = z.object({

@@ -16,11 +16,13 @@ import {
 interface Props {
   challengeId: number
   booksInChallengeCount: number
+  booksInLibraryCount: number
 }
 
 export const EditChallengeDialog = ({
   challengeId,
   booksInChallengeCount,
+  booksInLibraryCount,
 }: Props) => {
   const [open, setOpen] = useState<boolean>(false)
 
@@ -40,6 +42,7 @@ export const EditChallengeDialog = ({
           setOpen={setOpen}
           challengeId={challengeId}
           booksInChallengeCount={booksInChallengeCount}
+          booksInLibraryCount={booksInLibraryCount}
         />
       </DialogContent>
     </Dialog>

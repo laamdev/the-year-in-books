@@ -90,7 +90,7 @@ export const createChallenge = async (state: any, formData: FormData) => {
 // with react-hook-form useForm and next-safe-action
 export const editChallenge = action(
   EditChallengeFormSchema,
-  async ({ books_in_challenge_count, id }) => {
+  async ({ books_in_challenge_count, books_in_library_count, id }) => {
     const { userId } = await auth()
 
     if (!userId) {
@@ -99,6 +99,13 @@ export const editChallenge = action(
 
     if (!books_in_challenge_count) {
       return { error: "Something went wrong, couldn't update the challenge." }
+    }
+
+    if (books_in_challenge_count < books_in_library_count) {
+      return {
+        error:
+          "The number of books in your library can't exceed the number of books in your challenge.",
+      }
     }
 
     const updatedChallenge = await db
@@ -209,5 +216,5 @@ export const removeFromChallenge = async (bookId: number) => {
 
   await db.delete(books).where(eq(books.id, bookId))
 
-  revalidatePath("/library")
+  revalidateTag("challenges")
 }

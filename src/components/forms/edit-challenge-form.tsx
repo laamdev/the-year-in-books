@@ -25,6 +25,7 @@ import { EditChallengeFormSchema } from "@/lib/validation"
 interface Props {
   challengeId: number
   booksInChallengeCount: number
+  booksInLibraryCount: number
   setOpen: Dispatch<SetStateAction<boolean>>
 }
 
@@ -32,6 +33,7 @@ export const EditChallengeForm = ({
   setOpen,
   challengeId,
   booksInChallengeCount,
+  booksInLibraryCount,
 }: Props) => {
   const { toast } = useToast()
   const form = useForm<z.infer<typeof EditChallengeFormSchema>>({
@@ -39,6 +41,7 @@ export const EditChallengeForm = ({
     defaultValues: {
       id: challengeId,
       books_in_challenge_count: booksInChallengeCount,
+      books_in_library_count: booksInLibraryCount,
     },
   })
 

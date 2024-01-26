@@ -44,7 +44,7 @@ export const BooksTable = async ({
                       src={`https://covers.openlibrary.org/b/id/${book.cover}-M.jpg`}
                       alt={book.title}
                       fill
-                      className="bg-muted w-12 rounded-md"
+                      className="w-12 rounded-md"
                     />
                   </div>
                 </TableCell>

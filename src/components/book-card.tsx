@@ -4,6 +4,8 @@ import Image from "next/image"
 import { BookActionMenu } from "@/components/book-action-menu"
 import { Book } from "@/db/schema"
 
+import { Skeleton } from "./ui/skeleton"
+
 export const BookCard = ({ book }: { book: Book }) => {
   return (
     <div key={book.version} className="relative">
@@ -12,7 +14,7 @@ export const BookCard = ({ book }: { book: Book }) => {
           src={book.cover}
           alt={book.title}
           fill
-          className="bg-muted rounded-md object-cover object-center"
+          className="rounded-md object-cover object-center"
         />
       </div>
       <div className="mt-1 flex items-start justify-between">

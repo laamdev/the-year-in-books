@@ -40,12 +40,14 @@ export default async function ChallengePage() {
       </MaxWidthWrapper>
     )
   if (challenge?.success) {
-    const booksRead = challenge.success.books.filter(
+    const booksReadCount = challenge.success.books.filter(
       (book: Book) => book.is_read
     ).length
-    const booksAdded = challenge.success.books.length
+    const booksInLibraryCount = challenge.success.books.length
     const readPercentage = Math.floor(
-      Number((booksRead * 100) / challenge.success.books_in_challenge_count)
+      Number(
+        (booksReadCount * 100) / challenge.success.books_in_challenge_count
+      )
     )
     return (
       <MaxWidthWrapper>
@@ -76,7 +78,7 @@ export default async function ChallengePage() {
                           <div>
                             <p className="text-base">
                               <span>{`You've read `}</span>
-                              <span className="font-semibold">{`${booksRead}`}</span>
+                              <span className="font-semibold">{`${booksReadCount}`}</span>
                               <span>{` of `}</span>
                               <span className="font-semibold">
                                 {`${challenge.success.books_in_challenge_count}`}
@@ -84,7 +86,7 @@ export default async function ChallengePage() {
                               <span>{` books`}</span>
                             </p>
                             <p>
-                              <span>{`${booksAdded}`}</span>
+                              <span>{`${booksInLibraryCount}`}</span>
                               <span className="text-sm">{` books in library`}</span>
                             </p>
                           </div>
@@ -121,6 +123,7 @@ export default async function ChallengePage() {
                       booksInChallengeCount={
                         challenge.success.books_in_challenge_count
                       }
+                      booksInLibraryCount={booksInLibraryCount}
                     />
                     <DeleteChallengeDialog challengeId={challenge.success.id} />
                   </div>
