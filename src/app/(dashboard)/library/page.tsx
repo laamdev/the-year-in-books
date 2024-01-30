@@ -1,12 +1,11 @@
-import Image from "next/image"
 import { Suspense } from "react"
 
 import { getChallenge } from "@/app/_actions"
-import { BookCard } from "@/components/book-card"
-import { BookGrid } from "@/components/book-grid"
+import { BookCard } from "@/components/books/book-card"
+import { BookGrid } from "@/components/books/book-grid"
 import { MaxWidthWrapper } from "@/components/max-width-wrapper"
 import { Heading } from "@/components/shared/heading"
-import { BookGridSkeleton } from "@/components/skeletons/book-grid-skeleton"
+import { BookCardSkeleton } from "@/components/skeletons/book-card-skeleton"
 import { Badge } from "@/components/ui/badge"
 
 export default async function LibraryPage() {
@@ -22,13 +21,13 @@ export default async function LibraryPage() {
           </div>
           <Heading>{`Library`}</Heading>
         </div>
-        <Suspense fallback={<BookGridSkeleton />}>
-          <BookGrid>
-            {challenge.success.books.map((book) => (
-              <BookCard book={book} />
-            ))}
-          </BookGrid>
-        </Suspense>
+        <BookGrid size="sm">
+          {challenge.success.books.map((book) => (
+            <Suspense fallback={<BookCardSkeleton />} key={book.version}>
+              <BookCard size="sm" book={book} key={book.version} />
+            </Suspense>
+          ))}
+        </BookGrid>
       </MaxWidthWrapper>
     )
   }

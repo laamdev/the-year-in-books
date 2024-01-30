@@ -2,7 +2,7 @@ import Link from "next/link"
 import { Suspense } from "react"
 
 import { getChallenge } from "@/app/_actions"
-import { BooksTable } from "@/components/books-table"
+import { BooksTable } from "@/components/books/books-table"
 import { MaxWidthWrapper } from "@/components/max-width-wrapper"
 import Pagination from "@/components/pagination"
 import { SearchBar } from "@/components/search-bar"
@@ -60,7 +60,13 @@ export default async function AddPage({
         <Heading>{`Add Books`}</Heading>
 
         <section className="mt-10">
-          <SearchBar />
+          {challenge.success.books_in_challenge_count !==
+            challenge.success.books.length && <SearchBar />}
+
+          {challenge.success.books_in_challenge_count ===
+            challenge.success.books.length && (
+            <p className="max-w-prose">{`The amount of books in your library is the same as the books you want to read this year. If you want to add different books, please first remove one or more unwanted books from your challenge.`}</p>
+          )}
 
           {query && (
             <>

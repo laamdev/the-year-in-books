@@ -5,15 +5,15 @@ import Link from "next/link"
 import { Suspense } from "react"
 
 import { getChallenge } from "@/app/_actions"
-import { BookCard } from "@/components/book-card"
-import { BookGrid } from "@/components/book-grid"
+import { BookCard } from "@/components/books/book-card"
+import { BookGrid } from "@/components/books/book-grid"
 import { DeleteChallengeDialog } from "@/components/dialogs/delete-challenge-dialog"
 import { EditChallengeDialog } from "@/components/dialogs/edit-challenge-dialog"
 import { CreateChallengeForm } from "@/components/forms/create-challenge-form"
 import { MaxWidthWrapper } from "@/components/max-width-wrapper"
 import { Heading } from "@/components/shared/heading"
 import { Subheading } from "@/components/shared/subheading"
-import { BookGridSkeleton } from "@/components/skeletons/book-grid-skeleton"
+import { BookCardSkeleton } from "@/components/skeletons/book-card-skeleton"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
@@ -41,7 +41,7 @@ export default async function ChallengePage() {
     )
   if (challenge?.success) {
     const booksReadCount = challenge.success.books.filter(
-      (book: Book) => book.is_read
+      (book: Book) => book.status === "read"
     ).length
     const booksInLibraryCount = challenge.success.books.length
     const readPercentage = Math.floor(
@@ -70,7 +70,7 @@ export default async function ChallengePage() {
                         alt={user.firstName!}
                         width={1920}
                         height={1920}
-                        className="size-24 rounded-md"
+                        className="bg-primary/10 size-24 rounded-md"
                       />
 
                       <div className="flex w-full flex-col gap-y-1">
@@ -136,13 +136,13 @@ export default async function ChallengePage() {
             <div className="mt-20">
               <Subheading>{`Latest Books`}</Subheading>
 
-              <Suspense fallback={<BookGridSkeleton />}>
-                <BookGrid>
-                  {challenge.success.books.slice(0, 5).map((book) => (
-                    <BookCard key={book.version} book={book} />
-                  ))}
-                </BookGrid>
-              </Suspense>
+              <BookGrid>
+                {challenge.success.books.slice(0, 5).map((book) => (
+                  <Suspense fallback={<BookCardSkeleton />} key={book.version}>
+                    <BookCard book={book} />
+                  </Suspense>
+                ))}
+              </BookGrid>
             </div>
           </Suspense>
         </SignedIn>

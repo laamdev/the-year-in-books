@@ -41,15 +41,17 @@ export const BooksTable = async ({
                 <TableCell>
                   <div className="relative aspect-[3/5] w-16">
                     <Image
-                      src={`https://covers.openlibrary.org/b/id/${book.cover}-M.jpg`}
+                      src={`https://covers.openlibrary.org/b/id/${book.cover}-L.jpg`}
                       alt={book.title}
                       fill
-                      className="w-12 rounded-md"
+                      className="bg-primary/10 w-12 rounded-md"
                     />
                   </div>
                 </TableCell>
                 <TableCell className="max-w-32">{book.title}</TableCell>
-                <TableCell className="max-w-32">{book.author}</TableCell>
+                <TableCell className="max-w-32">
+                  {book.author.toString().split(",")[0]}
+                </TableCell>
                 <TableCell>{book.year}</TableCell>
                 <TableCell>{book.pages ?? "-"}</TableCell>
                 <TableCell>

@@ -1,6 +1,7 @@
 "use client"
 
 import { TrashIcon } from "lucide-react"
+import { redirect } from "next/navigation"
 import { useTransition } from "react"
 
 import { removeFromChallenge } from "@/app/_actions"

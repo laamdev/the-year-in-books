@@ -14,11 +14,7 @@ export const BookDataSchema = z.object({
   pages: z.coerce.number({ invalid_type_error: "You must enter a number" }),
   cover: z.coerce.string(),
   version: z.coerce.number(),
-  is_read: z.coerce
-    .boolean({
-      invalid_type_error: "is read must be a boolean",
-    })
-    .nullable(),
+  status: z.coerce.string(),
   challenge_id: z.coerce.number({
     invalid_type_error: "You must enter a number",
   }),

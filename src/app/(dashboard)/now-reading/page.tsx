@@ -4,28 +4,28 @@ import { MaxWidthWrapper } from "@/components/max-width-wrapper"
 import { Heading } from "@/components/shared/heading"
 import { Badge } from "@/components/ui/badge"
 
-export default async function ReadPage() {
+export default async function NowReadingPage() {
   const challenge = await getChallenge()
   if (challenge?.error) return <h1>{challenge.error}</h1>
   if (challenge?.success) {
-    const wantToReadBooks = challenge.success.books.filter(
-      (book) => book.status === "want_to_read"
+    const readBooks = challenge.success.books.filter(
+      (book) => book.status === "now_reading"
     )
-    const wantToReadBooksCount = wantToReadBooks.length
+    const readBooksCount = readBooks.length
 
     return (
       <MaxWidthWrapper>
         <div className="flex flex-col gap-y-2.5">
           <div>
-            <Badge variant="secondary">{`${wantToReadBooksCount} books`}</Badge>
+            <Badge variant="secondary">{`${readBooksCount} books`}</Badge>
           </div>
-          <Heading>{`Want to Read`}</Heading>
+          <Heading>{`Now Reading`}</Heading>
         </div>
 
-        {wantToReadBooksCount > 0 && <BookCarousel books={wantToReadBooks} />}
-        {wantToReadBooksCount === 0 && (
+        {readBooksCount > 0 && <BookCarousel books={readBooks} />}
+        {readBooksCount === 0 && (
           <div className="mt-10">
-            <p>{`You haven't read any of the books in your library.`}</p>
+            <p>{`You are not reading any books at the moment.`}</p>
           </div>
         )}
       </MaxWidthWrapper>

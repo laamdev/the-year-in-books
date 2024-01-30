@@ -3,6 +3,7 @@ import {
   bigint,
   boolean,
   integer,
+  pgEnum,
   pgTable,
   serial,
   timestamp,
@@ -18,6 +19,12 @@ export const challenges = pgTable("challenges", {
   created_at: timestamp("created_at").defaultNow().notNull(),
 })
 
+export const statusEnum = pgEnum("status", [
+  "want_to_read",
+  "now_reading",
+  "read",
+])
+
 export const books = pgTable("books", {
   id: serial("id").primaryKey(),
   title: varchar("title", { length: 256 }).notNull(),
@@ -26,7 +33,7 @@ export const books = pgTable("books", {
   version: bigint("version", { mode: "number" }).notNull(),
   year: integer("year").notNull().default(0),
   pages: integer("pages").notNull().default(0),
-  is_read: boolean("is_read").default(false).notNull(),
+  status: statusEnum("status").default("want_to_read").notNull(),
   challenge_id: integer("challenge_id"),
   created_at: timestamp("created_at").defaultNow().notNull(),
 })

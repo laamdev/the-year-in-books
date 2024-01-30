@@ -22,11 +22,11 @@ export const AddBookForm = ({
     title: selectedBook.title,
     version: selectedBook.version,
     cover: `https://covers.openlibrary.org/b/id/${selectedBook.cover}-L.jpg`,
-    author: selectedBook.author,
+    author: selectedBook.author.toString().split(",")[0],
     year: selectedBook.year,
     pages: selectedBook.pages,
     challenge_id: challenge.id,
-    is_read: false,
+    status: "want_to_read",
   }
   // @ts-expect-error
   const addBookWithSelectedBook = addBook.bind(null, bookToAdd)

@@ -17,7 +17,7 @@ export interface ApiBookFormated {
   year: number
   pages: number
   cover: string
-  is_read?: boolean
+  status: string
   challenge_id?: number
 }
 

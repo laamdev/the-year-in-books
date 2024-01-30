@@ -1,27 +1,27 @@
 "use client"
 
-import { BookCheckIcon } from "lucide-react"
+import { BookCheckIcon, BookXIcon } from "lucide-react"
 import { useTransition } from "react"
 
-import { markAsRead } from "@/app/_actions"
+import { markAsWantToRead } from "@/app/_actions"
 import { useToast } from "@/components/ui/use-toast"
 import { Book } from "@/db/schema"
 
-export const MarkAsReadButton = ({ book }: { book: Book }) => {
+export const MarkAsWantToReadButton = ({ book }: { book: Book }) => {
   const [isPending, startTransition] = useTransition()
   const { toast } = useToast()
 
   const triggerToastSuccess = () => {
     toast({
       title: "Success!",
-      description: `You've marked ${book.title} as read.`,
+      description: `You've marked ${book.title} as now reading.`,
     })
   }
 
   const triggerToastError = () => {
     toast({
       title: "Error!",
-      description: `Couldn't mark ${book.title} as read. Please try again.`,
+      description: `Couldn't mark ${book.title} as now reading. Please try again.`,
     })
   }
 
@@ -30,7 +30,7 @@ export const MarkAsReadButton = ({ book }: { book: Book }) => {
       onClick={() =>
         startTransition(async () => {
           try {
-            await markAsRead(book.id)
+            await markAsWantToRead(book.id)
             await triggerToastSuccess()
           } catch (error) {
             await triggerToastError()
@@ -39,9 +39,9 @@ export const MarkAsReadButton = ({ book }: { book: Book }) => {
       }
       className="flex items-center gap-x-1.5"
     >
-      <BookCheckIcon className="size-4" />
+      <BookXIcon className="size-4" />
 
-      <span>{`Mark as read`}</span>
+      <span>{`Mark as want to read`}</span>
     </button>
   )
 }

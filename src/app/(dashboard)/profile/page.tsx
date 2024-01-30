@@ -16,5 +16,4 @@ export default async function ReadPage() {
       <Heading>{`${user?.firstName} ${user?.lastName}'s Profile`}</Heading>
     </MaxWidthWrapper>
   )
-  //   }
 }

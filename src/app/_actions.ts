@@ -145,6 +145,25 @@ export const deleteChallenge = action(
   }
 )
 
+export const getBook = unstable_cache(
+  async (id: number) => {
+    const { userId } = await auth()
+
+    if (!userId) {
+      return { error: "Please sign in to fetch your book." }
+    }
+
+    const book = await db.query.books.findFirst({
+      where: eq(books.id, id),
+    })
+
+    if (!book?.id) return { error: "Couldn't retrieve this book." }
+    if (book?.id) return { success: book }
+  },
+  ["books"],
+  { tags: ["books"] }
+)
+
 // with bind
 export const addBook = async (state: Book, formData: FormData | null) => {
   const { userId } = await auth()
@@ -155,9 +174,9 @@ export const addBook = async (state: Book, formData: FormData | null) => {
     cover: state.cover,
     author: state.author,
     year: state.year,
-    pages: state.pages ?? 5,
+    pages: state.pages ?? null,
     challenge_id: state.challenge_id,
-    is_read: state.is_read,
+    status: state.status,
   })
 
   if (!userId) {
@@ -187,24 +206,42 @@ export const markAsRead = async (bookId: number) => {
   const { userId } = await auth()
 
   if (!userId) {
-    return { error: "Please sign in to create a challenge." }
+    return { error: "Please sign in to mark book as read." }
   }
 
-  await db.update(books).set({ is_read: true }).where(eq(books.id, bookId))
+  await db.update(books).set({ status: "read" }).where(eq(books.id, bookId))
 
   revalidateTag("challenges")
 }
 
-export const markAsNotRead = async (bookId: number) => {
+export const markAsNowReading = async (bookId: number) => {
   const { userId } = await auth()
 
   if (!userId) {
-    return { error: "Please sign in to mark this book as not read." }
+    return { error: "Please sign in to mark book as now reading." }
   }
 
-  await db.update(books).set({ is_read: false }).where(eq(books.id, bookId))
+  await db
+    .update(books)
+    .set({ status: "now_reading" })
+    .where(eq(books.id, bookId))
 
-  revalidatePath("/challenge")
+  revalidateTag("challenges")
+}
+
+export const markAsWantToRead = async (bookId: number) => {
+  const { userId } = await auth()
+
+  if (!userId) {
+    return { error: "Please sign in to mark this book as want to read." }
+  }
+
+  await db
+    .update(books)
+    .set({ status: "want_to_read" })
+    .where(eq(books.id, bookId))
+
+  revalidateTag("challenges")
 }
 
 export const removeFromChallenge = async (bookId: number) => {

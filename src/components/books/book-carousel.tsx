@@ -1,3 +1,7 @@
+import { Suspense } from "react"
+
+import { BookCard } from "@/components/books/book-card"
+import { BookCardSkeleton } from "@/components/skeletons/book-card-skeleton"
 import {
   Carousel,
   CarouselContent,
@@ -7,8 +11,6 @@ import {
 } from "@/components/ui/carousel"
 import { Book } from "@/db/schema"
 
-import { BookCard } from "./book-card"
-
 export const BookCarousel = ({ books }: { books: Book[] }) => {
   return (
     <Carousel className="mt-10">
@@ -16,7 +18,9 @@ export const BookCarousel = ({ books }: { books: Book[] }) => {
       <CarouselContent className="-ml-2 md:-ml-4">
         {books.map((book) => (
           <CarouselItem className="pl-2 md:basis-1/3 md:pl-4 lg:basis-1/5">
-            <BookCard book={book} />
+            <Suspense fallback={<BookCardSkeleton />}>
+              <BookCard book={book} />
+            </Suspense>
           </CarouselItem>
         ))}
       </CarouselContent>

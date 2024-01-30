@@ -1,10 +1,11 @@
 "use client"
 
 import {
-  ArchiveIcon,
+  BookCheckIcon,
+  BookCopyIcon,
+  BookHeartIcon,
   BookIcon,
-  BookOpenIcon,
-  CheckIcon,
+  BookOpenTextIcon,
   LibraryIcon,
   PlusIcon,
 } from "lucide-react"
@@ -18,9 +19,8 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable"
+import { Separator } from "@/components/ui/separator"
 import { cn } from "@/lib/utils"
-
-import { Separator } from "../ui/separator"
 
 export const Sidebar = ({
   defaultCollapsed = false,
@@ -28,11 +28,11 @@ export const Sidebar = ({
   booksCount,
   readBooksCount,
   wantToReadBooksCount,
+  nowReadingBooksCount,
   booksInChallengeCount,
 }: any) => {
   const [isCollapsed, setIsCollapsed] = useState(defaultCollapsed)
   const leftPanelRef = useRef<ImperativePanelHandle>(null)
-
   return (
     <ResizablePanelGroup direction="horizontal">
       <ResizablePanel
@@ -87,7 +87,7 @@ export const Sidebar = ({
               title: "Challenge",
               href: "/challenge",
               label: booksInChallengeCount,
-              icon: BookOpenIcon,
+              icon: LibraryIcon,
               variant: "ghost",
             },
             {
@@ -107,21 +107,28 @@ export const Sidebar = ({
               title: "Library",
               href: "/library",
               label: booksCount,
-              icon: LibraryIcon,
+              icon: BookCopyIcon,
               variant: "ghost",
             },
             {
               title: "Read",
               href: "/read",
-              label: readBooksCount,
-              icon: CheckIcon,
+              label: readBooksCount === 0 ? "0" : readBooksCount,
+              icon: BookCheckIcon,
+              variant: "ghost",
+            },
+            {
+              title: "Now Reading",
+              href: "/now-reading",
+              label: nowReadingBooksCount === 0 ? "0" : nowReadingBooksCount,
+              icon: BookOpenTextIcon,
               variant: "ghost",
             },
             {
               title: "Want to Read",
               href: "/want-to-read",
               label: wantToReadBooksCount === 0 ? "0" : wantToReadBooksCount,
-              icon: ArchiveIcon,
+              icon: BookHeartIcon,
               variant: "ghost",
             },
           ]}
