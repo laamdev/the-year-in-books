@@ -6,6 +6,7 @@ import type { Metadata } from "next"
 import localFont from "next/font/local"
 import { ReactNode } from "react"
 
+import { Header } from "@/components/navigation/header"
 import { Sidebar } from "@/components/navigation/sidebar"
 // // import { Providers } from "@/components/providers"
 import { Toaster } from "@/components/ui/toaster"
@@ -211,7 +212,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         >
           {/* <AnalyticsPageView /> */}
           <TooltipProvider delayDuration={0}>
-            <main className="relative flex min-h-screen flex-col bg-gradient-to-bl from-neutral-800 via-neutral-900 to-black">
+            <main className="relative flex min-h-screen flex-col bg-gradient-to-bl from-neutral-800 via-neutral-900 to-black ">
+              <Header />
               <div className="flex-1 grow">{children}</div>
             </main>
           </TooltipProvider>

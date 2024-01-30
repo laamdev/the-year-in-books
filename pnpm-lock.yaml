@@ -63,14 +63,14 @@ dependencies:
     specifier: 8.0.0-rc21
     version: 8.0.0-rc21(react@18.2.0)
   husky:
-    specifier: ^9.0.6
+    specifier: ^9.0.7
     version: 9.0.7
   lint-staged:
     specifier: ^15.2.0
     version: 15.2.0
   lucide-react:
-    specifier: ^0.316.0
-    version: 0.316.0(react@18.2.0)
+    specifier: ^0.317.0
+    version: 0.317.0(react@18.2.0)
   next:
     specifier: 14.1.0
     version: 14.1.0(react-dom@18.2.0)(react@18.2.0)
@@ -84,7 +84,7 @@ dependencies:
     specifier: ^3.4.3
     version: 3.4.3
   posthog-js:
-    specifier: ^1.103.0
+    specifier: ^1.103.1
     version: 1.103.1
   react:
     specifier: ^18
@@ -96,7 +96,7 @@ dependencies:
     specifier: ^7.49.3
     version: 7.49.3(react@18.2.0)
   react-resizable-panels:
-    specifier: ^1.0.9
+    specifier: ^1.0.10
     version: 1.0.10(react-dom@18.2.0)(react@18.2.0)
   tailwind-merge:
     specifier: ^2.2.1
@@ -104,6 +104,9 @@ dependencies:
   use-debounce:
     specifier: ^10.0.0
     version: 10.0.0(react@18.2.0)
+  vaul:
+    specifier: ^0.8.9
+    version: 0.8.9(@types/react-dom@18.2.18)(@types/react@18.2.48)(react-dom@18.2.0)(react@18.2.0)
   zod:
     specifier: ^3.22.4
     version: 3.22.4
@@ -125,7 +128,7 @@ devDependencies:
     specifier: ^18
     version: 18.2.18
   '@typescript-eslint/parser':
-    specifier: ^6.19.1
+    specifier: ^6.20.0
     version: 6.20.0(eslint@8.56.0)(typescript@5.3.3)
   autoprefixer:
     specifier: ^10.4.17
@@ -4010,8 +4013,8 @@ packages:
       es5-ext: 0.10.62
     dev: true
 
-  /lucide-react@0.316.0(react@18.2.0):
-    resolution: {integrity: sha512-dTmYX1H4IXsRfVcj/KUxworV6814ApTl7iXaS21AimK2RUEl4j4AfOmqD3VR8phe5V91m4vEJ8tCK4uT1jE5nA==}
+  /lucide-react@0.317.0(react@18.2.0):
+    resolution: {integrity: sha512-8J8fIim0Sc+AYn8skgVau+hRGXaqjErRNzuW0vIGt4QA/f3UvY8g8o2A/OL9deCBKxZjVD1zuoidyMCiq8rfFQ==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0
     dependencies:
@@ -5436,6 +5439,20 @@ packages:
   /util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
     dev: true
+
+  /vaul@0.8.9(@types/react-dom@18.2.18)(@types/react@18.2.48)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-gpmtmZRWDPP6niQh14JfRIFUYZVyfvAWyA/7rUINOfNlO/2K7uEvI5rLXEXkxZIRFyUZj+TPHLFMirkegPHjrw==}
+    peerDependencies:
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+    dependencies:
+      '@radix-ui/react-dialog': 1.0.5(@types/react-dom@18.2.18)(@types/react@18.2.48)(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-dom'
+    dev: false
 
   /webcrypto-core@1.7.8:
     resolution: {integrity: sha512-eBR98r9nQXTqXt/yDRtInszPMjTaSAMJAFDg2AHsgrnczawT1asx9YNBX6k5p+MekbPF4+s/UJJrr88zsTqkSg==}

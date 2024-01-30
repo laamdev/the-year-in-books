@@ -22,7 +22,7 @@ export const AddBookForm = ({
     title: selectedBook.title,
     version: selectedBook.version,
     cover: `https://covers.openlibrary.org/b/id/${selectedBook.cover}-L.jpg`,
-    author: selectedBook.author.toString().split(",")[0],
+    author: selectedBook?.author?.toString().split(",")[0],
     year: selectedBook.year,
     pages: selectedBook.pages,
     challenge_id: challenge.id,

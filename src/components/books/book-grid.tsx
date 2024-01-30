@@ -12,7 +12,7 @@ export const BookGrid = ({ size = "DEFAULT", children }: Props) => {
     <div
       className={cn(
         "mt-10 grid grid-cols-2 gap-x-5 gap-y-10 md:grid-cols-5",
-        size === "sm" && "grid-cols-7"
+        size === "sm" && "grid-cols-3 md:grid-cols-7"
       )}
     >
       {children}

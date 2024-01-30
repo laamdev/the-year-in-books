@@ -50,7 +50,7 @@ export const BooksTable = async ({
                 </TableCell>
                 <TableCell className="max-w-32">{book.title}</TableCell>
                 <TableCell className="max-w-32">
-                  {book.author.toString().split(",")[0]}
+                  {book?.author?.toString().split(",")[0]}
                 </TableCell>
                 <TableCell>{book.year}</TableCell>
                 <TableCell>{book.pages ?? "-"}</TableCell>
