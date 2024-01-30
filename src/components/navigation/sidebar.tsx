@@ -22,6 +22,8 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { cn } from "@/lib/utils"
 
+import { MainLogo } from "../logos/main-logo"
+
 export const Sidebar = ({
   defaultCollapsed = false,
   children,
@@ -69,13 +71,28 @@ export const Sidebar = ({
           {!isCollapsed && (
             <Link
               href="/"
-              className={cn("font-serif font-bold")}
-            >{`Reading Challenge`}</Link>
+              className={cn(
+                "hover:text-primary tw-transition flex items-center gap-x-1 font-serif font-medium uppercase"
+              )}
+            >
+              {`The Year in Books`}
+            </Link>
           )}
 
           {isCollapsed && (
-            <Link href="/">
-              <BookIcon className={cn(isCollapsed ? "h-[52px]" : "px-2")} />
+            <Link
+              href="/"
+              className={cn(
+                "hover:text-primary tw-transition flex items-center gap-x-1 font-serif font-medium uppercase"
+              )}
+            >
+              {`TIYB`}
+              {/* <MainLogo
+                className={cn(
+                  "hover:stroke-primary tw-transition stroke-white",
+                  isCollapsed ? "size-8" : "px-2"
+                )}
+              /> */}
             </Link>
           )}
         </div>

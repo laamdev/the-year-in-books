@@ -11,44 +11,51 @@ import { currentYear } from "@/lib/utils"
 
 export default function HomePage() {
   return (
-    <div className="h-screen">
-      <MaxWidthWrapper className="grid h-full grid-cols-2 place-content-center gap-x-10">
-        <div className="">
-          <div>
-            <Badge variant="secondary">{`${currentYear} Reading Challenge`}</Badge>
+    <MaxWidthWrapper className="grid gap-y-20 md:h-screen md:grid-cols-2 md:place-content-center md:gap-x-10">
+      <div className="">
+        <div>
+          <Badge variant="secondary">{`${currentYear} Reading Challenge`}</Badge>
 
-            <h1 className="mt-2.5 flex flex-col font-serif text-8xl font-bold">
-              <span>{`The Year`}</span>
-              <span>{`in Books`}</span>
-            </h1>
-            <p className="mt-5 max-w-lg text-xl">{`Bolt powers frictionless experiences for retailers and customers at every step of the shopping journey—from login to checkout.`}</p>
-          </div>
-          <div className="mt-10 flex gap-x-5">
-            <SignedIn>
-              <Link
-                href="/challenge"
-                className={buttonVariants({ className: "" })}
-              >{`Your Challenge`}</Link>
-              <SignOutButton>
-                <Button variant="secondary">{`Sign Out`}</Button>
-              </SignOutButton>
-            </SignedIn>
-            <SignedOut>
-              <Link
-                href="/sign-in"
-                className={buttonVariants({ className: "" })}
-              >{`Log In`}</Link>
-              <Link
-                href="/sign-up"
-                className={buttonVariants({
-                  className: "",
-                  variant: "secondary",
-                })}
-              >{`Sign Up`}</Link>
-            </SignedOut>
-          </div>
+          <h1 className="mt-2.5 flex flex-col font-serif text-6xl font-bold md:text-8xl">
+            <span>{`The Year`}</span>
+            <span>{`in Books`}</span>
+          </h1>
+          <p className="mt-5 max-w-lg text-lg md:text-xl">{`Want to motivate yourself to read more in ${currentYear}? Join our annual reading challenge and fall in love with reading again — your new favourite book may still be in your backlog!`}</p>
         </div>
-      </MaxWidthWrapper>
-    </div>
+        <div className="mt-5 flex gap-x-5 md:mt-10">
+          <SignedIn>
+            <Link
+              href="/challenge"
+              className={buttonVariants({ className: "" })}
+            >{`Your Challenge`}</Link>
+            <Button variant="secondary" className="min-w-[90px]">
+              <SignOutButton>{`Sign Out`}</SignOutButton>
+            </Button>
+          </SignedIn>
+          <SignedOut>
+            <Link
+              href="/sign-in"
+              className={buttonVariants({ className: "" })}
+            >{`Log In`}</Link>
+            <Link
+              href="/sign-up"
+              className={buttonVariants({
+                className: "",
+                variant: "secondary",
+              })}
+            >{`Sign Up`}</Link>
+          </SignedOut>
+        </div>
+      </div>
+      <div>
+        <Image
+          src={`/images/book-covers.webp`}
+          alt="book covers"
+          width={1024}
+          height={768}
+          className="rounded-md"
+        />
+      </div>
+    </MaxWidthWrapper>
   )
 }
