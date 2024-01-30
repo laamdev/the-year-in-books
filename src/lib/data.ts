@@ -36,6 +36,7 @@ export const fetchFilteredBooks = async (
           version: book._version_,
           pages: book.number_of_pages_median,
           cover: book.cover_i,
+          status: "want_to_read",
         })
       )
 
