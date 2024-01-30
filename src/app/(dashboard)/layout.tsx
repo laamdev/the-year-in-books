@@ -11,7 +11,6 @@ export default async function DashboardLayout({
   const challenge = await getChallenge()
   if (challenge?.error) return <h1>{challenge.error}</h1>
   if (challenge?.success) {
-    console.log(challenge.success)
     const booksCount = challenge.success.books.length
 
     const readBooksCount = challenge.success.books.filter(
