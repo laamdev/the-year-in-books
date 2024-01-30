@@ -40,15 +40,23 @@ export default async function ChallengePage() {
       </MaxWidthWrapper>
     )
   if (challenge?.success) {
-    const booksReadCount = challenge.success.books.filter(
+    const booksRead = challenge.success.books.filter(
       (book: Book) => book.status === "read"
-    ).length
+    )
+    const booksReadCount = booksRead.length
+    const booksReadPages = booksRead.map((book) => book.pages)
+    const readBooksPagesSum = booksReadPages.reduce(
+      (accumulator, currentValue) => accumulator + currentValue,
+      0
+    )
+
     const booksInLibraryCount = challenge.success.books.length
     const readPercentage = Math.floor(
       Number(
         (booksReadCount * 100) / challenge.success.books_in_challenge_count
       )
     )
+
     return (
       <MaxWidthWrapper>
         <div className="flex flex-col gap-y-2.5">
@@ -59,12 +67,12 @@ export default async function ChallengePage() {
         </div>
 
         <SignedIn>
-          <Suspense fallback={null}>
-            <Card className="relative mt-10 max-w-md">
+          <section className="mt-12 grid grid-cols-5 gap-3">
+            <Card className="relative col-span-2">
               {challenge ? (
                 <>
                   <CardContent className="pt-6">
-                    <div className="flex items-center gap-x-5">
+                    <div className="flex items-center gap-x-6">
                       <Image
                         src={user.imageUrl}
                         alt={user.firstName!}
@@ -132,19 +140,30 @@ export default async function ChallengePage() {
                 <CreateChallengeForm />
               )}
             </Card>
+            <Card className="col-span-1 h-fit">
+              <CardHeader>Total Pages Read</CardHeader>
+              <CardContent className="font-serif text-3xl font-bold">
+                {readBooksPagesSum}
+              </CardContent>
+            </Card>
+            <Card className="col-span-1 h-fit">
+              <CardHeader>Total Pages Read</CardHeader>
+              <CardContent className="flex items-center font-serif text-3xl font-bold">
+                {readBooksPagesSum}
+              </CardContent>
+            </Card>
+          </section>
+          <div className="mt-20">
+            <Subheading>{`Latest Books`}</Subheading>
 
-            <div className="mt-20">
-              <Subheading>{`Latest Books`}</Subheading>
-
-              <BookGrid>
-                {challenge.success.books.slice(0, 5).map((book) => (
-                  <Suspense fallback={<BookCardSkeleton />} key={book.version}>
-                    <BookCard book={book} />
-                  </Suspense>
-                ))}
-              </BookGrid>
-            </div>
-          </Suspense>
+            <BookGrid>
+              {challenge.success.books.slice(0, 5).map((book) => (
+                <Suspense fallback={<BookCardSkeleton />} key={book.version}>
+                  <BookCard book={book} />
+                </Suspense>
+              ))}
+            </BookGrid>
+          </div>
         </SignedIn>
         <SignedOut>
           {`Want to create/access your reading challenge? `}

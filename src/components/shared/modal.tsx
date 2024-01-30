@@ -1,5 +1,6 @@
 "use client"
 
+import { DotIcon } from "lucide-react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 
@@ -14,6 +15,8 @@ import {
 } from "@/components/ui/dialog"
 import { Book } from "@/db/schema"
 import { cn } from "@/lib/utils"
+
+import { Separator } from "../ui/separator"
 
 interface Props {
   book: Book
@@ -45,6 +48,29 @@ export const Modal = ({ book }: Props) => {
             {book.author}
           </p>
           <Subheading>{book.title}</Subheading>
+
+          <div className="w-full fill-white py-5">
+            <Separator className="w-full bg-white opacity-50" />
+          </div>
+
+          <div className="mt-2.5 grid grid-cols-3 gap-x-5">
+            <p className="flex flex-col">
+              <span className="text-sm font-bold">{`${book.pages}`}</span>
+              <span className="text-xs opacity-75">{`pages`}</span>
+            </p>
+            <p className="flex flex-col">
+              <span className="text-sm font-bold">{`${book.year}`}</span>
+              <span className="text-xs opacity-75">{`year`}</span>
+            </p>
+            <p className="flex flex-col">
+              <span className="text-sm font-bold ">
+                {book.status === "read" && "Read"}
+                {book.status === "want_to_read" && "to Read"}
+                {book.status === "now_reading" && "Reading"}
+              </span>
+              <span className="text-xs opacity-75">{`status`}</span>
+            </p>
+          </div>
         </div>
       </DialogContent>
     </Dialog>

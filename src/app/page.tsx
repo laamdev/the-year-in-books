@@ -20,8 +20,9 @@ export default function HomePage() {
             <span>{`The Year`}</span>
             <span>{`in Books`}</span>
           </h1>
-          <p className="mt-5 max-w-lg text-lg md:text-xl">{`Want to motivate yourself to read more in ${currentYear}? Join our annual reading challenge and fall in love with reading again — your new favourite book may still be in your backlog!`}</p>
+          <p className="mt-2.5 max-w-lg text-lg md:mt-5 md:text-xl">{`Want to motivate yourself to read more in ${currentYear}? Join our annual reading challenge and fall in love with reading again — your new favourite book may still be in your backlog!`}</p>
         </div>
+
         <div className="mt-5 flex gap-x-5 md:mt-10">
           <SignedIn>
             <Link
