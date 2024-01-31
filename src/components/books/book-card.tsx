@@ -1,13 +1,9 @@
-import { BookCheckIcon, BookHeartIcon, BookOpenTextIcon } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
 import { BookActionMenu } from "@/components/books/book-action-menu"
-import { Badge } from "@/components/ui/badge"
 import { Book } from "@/db/schema"
 import { cn } from "@/lib/utils"
-
-import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip"
 
 interface Props {
   size?: "sm" | "DEFAULT"
@@ -25,27 +21,6 @@ export const BookCard = ({ size = "DEFAULT", book }: Props) => {
             fill
             className="bg-primary/10 tw-transition rounded-md object-cover object-center hover:scale-105"
           />
-
-          {book.status === "read" && (
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <BookCheckIcon className="bg-primary absolute right-1 top-1 z-50 size-8 rounded-full p-1.5" />
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Read</p>
-              </TooltipContent>
-            </Tooltip>
-          )}
-          {book.status === "now_reading" && (
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <BookOpenTextIcon className="bg-secondary absolute right-1 top-1 z-50 size-8 rounded-full p-1.5" />
-              </TooltipTrigger>
-              <TooltipContent className="bg-secondary">
-                <p>Now Reading</p>
-              </TooltipContent>
-            </Tooltip>
-          )}
         </div>
       </Link>
 

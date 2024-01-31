@@ -1,14 +1,6 @@
 "use client"
 
-import {
-  BookCheckIcon,
-  BookCopyIcon,
-  BookHeartIcon,
-  BookIcon,
-  BookOpenTextIcon,
-  LibraryIcon,
-  PlusIcon,
-} from "lucide-react"
+import { BookCopyIcon, LibraryIcon, PlusIcon } from "lucide-react"
 import Link from "next/link"
 import { useRef, useState } from "react"
 import { ImperativePanelHandle } from "react-resizable-panels"
@@ -22,15 +14,10 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { cn } from "@/lib/utils"
 
-import { MainLogo } from "../logos/main-logo"
-
 export const Sidebar = ({
   defaultCollapsed = false,
   children,
   booksCount,
-  readBooksCount,
-  wantToReadBooksCount,
-  nowReadingBooksCount,
   booksInChallengeCount,
 }: any) => {
   const [isCollapsed, setIsCollapsed] = useState(defaultCollapsed)
@@ -108,19 +95,6 @@ export const Sidebar = ({
               variant: "ghost",
             },
             {
-              title: "Add Books",
-              href: "/add-books",
-              label: "",
-              icon: PlusIcon,
-              variant: "ghost",
-            },
-          ]}
-        />
-        <Separator />
-        <Nav
-          isCollapsed={isCollapsed}
-          links={[
-            {
               title: "Library",
               href: "/library",
               label: booksCount,
@@ -128,24 +102,10 @@ export const Sidebar = ({
               variant: "ghost",
             },
             {
-              title: "Read",
-              href: "/read",
-              label: readBooksCount === 0 ? "0" : readBooksCount,
-              icon: BookCheckIcon,
-              variant: "ghost",
-            },
-            {
-              title: "Now Reading",
-              href: "/now-reading",
-              label: nowReadingBooksCount === 0 ? "0" : nowReadingBooksCount,
-              icon: BookOpenTextIcon,
-              variant: "ghost",
-            },
-            {
-              title: "Want to Read",
-              href: "/want-to-read",
-              label: wantToReadBooksCount === 0 ? "0" : wantToReadBooksCount,
-              icon: BookHeartIcon,
+              title: "Add Books",
+              href: "/add-books",
+              label: "",
+              icon: PlusIcon,
               variant: "ghost",
             },
           ]}

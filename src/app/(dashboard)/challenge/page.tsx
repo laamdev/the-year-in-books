@@ -2,18 +2,13 @@ import { SignedIn, SignedOut } from "@clerk/nextjs"
 import { currentUser } from "@clerk/nextjs"
 import Image from "next/image"
 import Link from "next/link"
-import { Suspense } from "react"
 
 import { getChallenge } from "@/app/_actions"
-import { BookCard } from "@/components/books/book-card"
-import { BookGrid } from "@/components/books/book-grid"
 import { DeleteChallengeDialog } from "@/components/dialogs/delete-challenge-dialog"
 import { EditChallengeDialog } from "@/components/dialogs/edit-challenge-dialog"
 import { CreateChallengeForm } from "@/components/forms/create-challenge-form"
 import { MaxWidthWrapper } from "@/components/max-width-wrapper"
 import { Heading } from "@/components/shared/heading"
-import { Subheading } from "@/components/shared/subheading"
-import { BookCardSkeleton } from "@/components/skeletons/book-card-skeleton"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
@@ -153,18 +148,8 @@ export default async function ChallengePage() {
               </CardContent>
             </Card>
           </section>
-          <div className="mt-20">
-            <Subheading>{`Latest Books`}</Subheading>
-
-            <BookGrid>
-              {challenge.success.books.slice(0, 5).map((book) => (
-                <Suspense fallback={<BookCardSkeleton />} key={book.version}>
-                  <BookCard book={book} />
-                </Suspense>
-              ))}
-            </BookGrid>
-          </div>
         </SignedIn>
+
         <SignedOut>
           {`Want to create/access your reading challenge? `}
           <Link href="sign-up">{`Sign up`}</Link>

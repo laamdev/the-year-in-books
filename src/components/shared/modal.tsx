@@ -27,13 +27,9 @@ export const Modal = ({ book }: Props) => {
             fill
             className="bg-primary/10 tw-transition rounded-md object-cover object-center group-hover:scale-105"
           />
-
-          {/* {book.status === "read" && (
-            <Badge className="absolute right-1.5 top-1.5 z-50 size-8 fill-red-600 stroke-black">{`Read`}</Badge>
-          )} */}
         </div>
         <div className="flex flex-col">
-          <p className={cn("text-primary text-xs font-medium uppercase")}>
+          <p className={cn("text-primary mb-1 text-xs font-medium uppercase")}>
             {book.author}
           </p>
           <Subheading>{book.title}</Subheading>
