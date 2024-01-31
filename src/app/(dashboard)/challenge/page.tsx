@@ -35,12 +35,18 @@ export default async function ChallengePage() {
       </MaxWidthWrapper>
     )
   if (challenge?.success) {
+    const booksPages = challenge.success.books.map((book) => book.pages)
+    const booksPagesSum = booksPages.reduce(
+      (accumulator, currentValue) => accumulator + currentValue,
+      0
+    )
+
     const booksRead = challenge.success.books.filter(
       (book: Book) => book.status === "read"
     )
     const booksReadCount = booksRead.length
     const booksReadPages = booksRead.map((book) => book.pages)
-    const readBooksPagesSum = booksReadPages.reduce(
+    const booksReadPagesSum = booksReadPages.reduce(
       (accumulator, currentValue) => accumulator + currentValue,
       0
     )
@@ -54,7 +60,7 @@ export default async function ChallengePage() {
 
     return (
       <MaxWidthWrapper>
-        <div className="flex flex-col gap-y-2.5">
+        <div className="flex flex-col gap-y-2">
           <div>
             <Badge variant="secondary">{`Hello, ${user.firstName} ${user.lastName}`}</Badge>
           </div>
@@ -67,7 +73,7 @@ export default async function ChallengePage() {
               {challenge ? (
                 <>
                   <CardContent className="pt-6">
-                    <div className="flex items-center gap-x-6">
+                    <div className="flex items-center gap-x-4">
                       <Image
                         src={user.imageUrl}
                         alt={user.firstName!}
@@ -95,9 +101,9 @@ export default async function ChallengePage() {
                           </div>
                         </div>
 
-                        <div className="flex items-center justify-center gap-x-5">
+                        <div className="flex items-center justify-center gap-x-2">
                           <Progress value={readPercentage} />
-                          <p>{readPercentage}%</p>
+                          <p className="text-sm">{`${readPercentage}%`}</p>
                         </div>
 
                         <p className="text-sm">
@@ -107,20 +113,20 @@ export default async function ChallengePage() {
                       </div>
                     </div>
                   </CardContent>
-                  <CardFooter className="flex justify-between gap-x-5">
+                  <CardFooter className="flex justify-between gap-x-4">
                     <Button variant="secondary" className="flex-1">
                       <Link href="/library" className="w-full">
-                        View Library
+                        {`View Library`}
                       </Link>
                     </Button>
                     <Button className="flex-1">
                       <Link href="/add-books" className="w-full">
-                        Add Books
+                        {`Add Books`}
                       </Link>
                     </Button>
                   </CardFooter>
 
-                  <div className="absolute right-2.5 top-2.5 flex gap-x-2.5">
+                  <div className="absolute right-2 top-2 flex gap-x-4">
                     <EditChallengeDialog
                       challengeId={challenge.success.id}
                       booksInChallengeCount={
@@ -136,15 +142,15 @@ export default async function ChallengePage() {
               )}
             </Card>
             <Card className="col-span-1 h-fit">
-              <CardHeader>Total Pages Read</CardHeader>
-              <CardContent className="font-serif text-3xl font-bold">
-                {readBooksPagesSum}
+              <CardHeader>{`Total Pages`}</CardHeader>
+              <CardContent className="flex items-center font-serif text-3xl font-bold">
+                {`${booksPagesSum}`}
               </CardContent>
             </Card>
             <Card className="col-span-1 h-fit">
-              <CardHeader>Total Pages Read</CardHeader>
-              <CardContent className="flex items-center font-serif text-3xl font-bold">
-                {readBooksPagesSum}
+              <CardHeader>{`Total Pages Read`}</CardHeader>
+              <CardContent className="font-serif text-3xl font-bold">
+                {`${booksReadPagesSum}`}
               </CardContent>
             </Card>
           </section>

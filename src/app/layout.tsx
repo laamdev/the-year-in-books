@@ -2,13 +2,11 @@ import "./globals.css"
 
 import { ClerkProvider } from "@clerk/nextjs"
 import type { Metadata } from "next"
-// // import dynamic from "next/dynamic"
 import localFont from "next/font/local"
 import { ReactNode } from "react"
 
 import { Header } from "@/components/navigation/header"
 import { Sidebar } from "@/components/navigation/sidebar"
-// // import { Providers } from "@/components/providers"
 import { Toaster } from "@/components/ui/toaster"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { cn } from "@/lib/utils"
@@ -192,13 +190,6 @@ export const metadata: Metadata = {
   description:
     "An annual reading challenge that helps you rediscover your love for books.",
 }
-
-// // const AnalyticsPageView = dynamic(
-// //   () => import("@/components/analytics-page-view"!),
-// //   {
-// //     ssr: false,
-// //   }
-// // )
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
