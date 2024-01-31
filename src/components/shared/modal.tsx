@@ -1,22 +1,13 @@
 "use client"
 
-import { DotIcon } from "lucide-react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 
 import { Subheading } from "@/components/shared/subheading"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog"
+import { Dialog, DialogContent } from "@/components/ui/dialog"
+import { Separator } from "@/components/ui/separator"
 import { Book } from "@/db/schema"
 import { cn } from "@/lib/utils"
-
-import { Separator } from "../ui/separator"
 
 interface Props {
   book: Book
@@ -25,8 +16,6 @@ interface Props {
 export const Modal = ({ book }: Props) => {
   const router = useRouter()
   const handleClose = () => router.back()
-
-  console.log(book)
 
   return (
     <Dialog open={true} onOpenChange={handleClose}>

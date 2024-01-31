@@ -1,5 +1,6 @@
 import { getBook } from "@/app/_actions"
 import { Modal } from "@/components/shared/modal"
+
 interface Props {
   params: {
     id: number
