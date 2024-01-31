@@ -1,6 +1,13 @@
 "use client"
 
-import { BookCopyIcon, LibraryIcon, PlusIcon } from "lucide-react"
+import {
+  BarChart2Icon,
+  BookCopyIcon,
+  LibraryIcon,
+  LogOutIcon,
+  PlusIcon,
+  UserIcon,
+} from "lucide-react"
 import Link from "next/link"
 import { useRef, useState } from "react"
 import { ImperativePanelHandle } from "react-resizable-panels"
@@ -110,8 +117,33 @@ export const Sidebar = ({
             },
           ]}
         />
-
         <Separator />
+        <Nav
+          isCollapsed={isCollapsed}
+          links={[
+            {
+              title: "Stats",
+              href: "/stats",
+              // // label: booksCount,
+              icon: BarChart2Icon,
+              variant: "ghost",
+            },
+            {
+              title: "Profile",
+              href: "/profile",
+              // // label: booksCount,
+              icon: UserIcon,
+              variant: "ghost",
+            },
+            {
+              title: "Log Out",
+              href: "/",
+              // // label: booksInChallengeCount,
+              icon: LogOutIcon,
+              variant: "ghost",
+            },
+          ]}
+        />
       </ResizablePanel>
       <ResizableHandle withHandle />
       <ResizablePanel defaultSize={1440} minSize={30}>
