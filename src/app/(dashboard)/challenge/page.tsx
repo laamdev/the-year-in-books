@@ -68,7 +68,7 @@ export default async function ChallengePage() {
         </div>
 
         <SignedIn>
-          <section className="mt-12 grid grid-cols-5 gap-3">
+          <section className="mt-12 grid grid-cols-2 gap-3 md:grid-cols-4">
             <Card className="relative col-span-2">
               {challenge ? (
                 <>
