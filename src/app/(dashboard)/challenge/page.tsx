@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { Book } from "@/db/schema"
-import { currentYear, timeLeft } from "@/lib/utils"
+import { currentYear, getBookSchedule, timeLeft } from "@/lib/utils"
 
 export default async function ChallengePage() {
   const user = await currentUser()
@@ -56,6 +56,11 @@ export default async function ChallengePage() {
       Number(
         (booksReadCount * 100) / challenge.success.books_in_challenge_count
       )
+    )
+
+    const bookReadingRate = getBookSchedule(
+      challenge.success.books_in_challenge_count,
+      booksReadCount
     )
 
     return (
@@ -106,10 +111,20 @@ export default async function ChallengePage() {
                           <p className="text-sm">{`${readPercentage}%`}</p>
                         </div>
 
-                        <p className="text-sm">
-                          <span className="font-semibold">{`1`}</span>
-                          <span>{` book ahead of schedule`}</span>
-                        </p>
+                        {bookReadingRate === 0 ? (
+                          <p className="text-sm">
+                            <span>{`You're right on schedule.`}</span>
+                          </p>
+                        ) : (
+                          <p className="text-sm">
+                            <span className="font-semibold">{`${Math.abs(bookReadingRate)}`}</span>
+                            <span>{`${Math.abs(bookReadingRate) > 1 ? " books" : " book"}`}</span>
+                            <span>
+                              {bookReadingRate < 0 && " ahead of schedule"}
+                              {bookReadingRate > 0 && " behind schedule"}
+                            </span>
+                          </p>
+                        )}
                       </div>
                     </div>
                   </CardContent>

@@ -1,5 +1,5 @@
 import { type ClassValue, clsx } from "clsx"
-import { differenceInHours, endOfYear } from "date-fns"
+import { differenceInHours, endOfYear, getDayOfYear } from "date-fns"
 import { twMerge } from "tailwind-merge"
 
 export const cn = (...inputs: ClassValue[]) => {
@@ -50,4 +50,19 @@ export const timeLeft = () => {
   const hours = Math.floor(difference % 24)
 
   return { days, hours }
+}
+
+export const getBookSchedule = (
+  booksInChallenge: number,
+  booksRead: number
+) => {
+  const daysInYear = 365
+  const dayOfYearNumber = getDayOfYear(new Date())
+  const readingRateInDays = Math.floor(daysInYear / booksInChallenge)
+
+  const booksYouShouldHaveRead = Math.floor(dayOfYearNumber / readingRateInDays)
+
+  const result = booksYouShouldHaveRead - booksRead
+
+  return result
 }
