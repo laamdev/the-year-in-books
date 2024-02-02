@@ -10,8 +10,6 @@ export default async function StatsPage() {
   return (
     <MaxWidthWrapper>
       <Heading>{`Stats`}</Heading>
-
-      <Suspense fallback={null}></Suspense>
     </MaxWidthWrapper>
   )
   //   }

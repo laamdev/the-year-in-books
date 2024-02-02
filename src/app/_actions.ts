@@ -13,6 +13,7 @@ import {
   ChallengeDataschema,
   DeleteChallengeFormSchema,
   EditChallengeFormSchema,
+  RemoveBookFromChallengeFormSchema,
 } from "@/lib/validation"
 
 const action = createSafeActionClient()
@@ -160,8 +161,8 @@ export const getBook = unstable_cache(
     if (!book?.id) return { error: "Couldn't retrieve this book." }
     if (book?.id) return { success: book }
   },
-  ["books"],
-  { tags: ["books"] }
+  ["challenges", "books"],
+  { tags: ["challenges", "books"] }
 )
 
 // with bind
@@ -244,14 +245,31 @@ export const markAsWantToRead = async (bookId: number) => {
   revalidateTag("challenges")
 }
 
-export const removeFromChallenge = async (bookId: number) => {
-  const { userId } = await auth()
+export const removeBookFromChallenge = action(
+  RemoveBookFromChallengeFormSchema,
+  async ({ id }) => {
+    const { userId } = await auth()
 
-  if (!userId) {
-    return { error: "Please sign in to remove this book from your challenge." }
+    if (!userId) {
+      return { error: "Please sign in to remove book from challenge." }
+    }
+
+    if (!id) {
+      return {
+        error: "Something went wrong, couldn't remove book from challenge.",
+      }
+    }
+
+    const bookRemovedFromChallenge = await db
+      .delete(books)
+      .where(eq(books.id, id))
+
+    revalidateTag("challenges")
+
+    if (!bookRemovedFromChallenge)
+      return { error: "Could not remove book from challenge" }
+
+    if (bookRemovedFromChallenge)
+      return { success: "Book removed from challenge" }
   }
-
-  await db.delete(books).where(eq(books.id, bookId))
-
-  revalidateTag("challenges")
-}
+)

@@ -26,25 +26,28 @@ export default async function LibraryPage() {
         </div>
 
         <div className="mt-20 flex flex-col gap-y-20">
-          {wantToReadBooks.length > 0 && (
+          {readBooks && (
             <BookCarousel
-              title="Want to Read"
-              count={wantToReadBooks.length}
-              books={wantToReadBooks}
+              title="Read"
+              emptyMsg="You've not read any books yet."
+              count={readBooks.length}
+              books={readBooks}
             />
           )}
-          {nowReadingBooks.length > 0 && (
+          {nowReadingBooks && (
             <BookCarousel
               title="Now Reading"
+              emptyMsg="You're not currently reading any books."
               count={nowReadingBooks.length}
               books={nowReadingBooks}
             />
           )}
-          {readBooks.length > 0 && (
+          {wantToReadBooks && (
             <BookCarousel
-              title="Read"
-              count={readBooks.length}
-              books={readBooks}
+              title="Want to Read"
+              emptyMsg="You've not books in your backlog."
+              count={wantToReadBooks.length}
+              books={wantToReadBooks}
             />
           )}
         </div>

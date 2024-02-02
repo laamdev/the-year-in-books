@@ -35,3 +35,7 @@ export const EditChallengeFormSchema = z.object({
 export const DeleteChallengeFormSchema = z.object({
   id: z.coerce.number(),
 })
+
+export const RemoveBookFromChallengeFormSchema = z.object({
+  id: z.coerce.number(),
+})
