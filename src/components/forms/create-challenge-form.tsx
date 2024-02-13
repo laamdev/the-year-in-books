@@ -35,7 +35,7 @@ export const CreateChallengeForm = () => {
           <p>{`I want to read`}</p>
           <Input
             name="books_in_challenge_count"
-            className="w-20"
+            className="w-12"
             placeholder="0"
           />
           <p>{`books in ${currentYear}.`}</p>

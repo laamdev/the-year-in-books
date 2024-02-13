@@ -110,7 +110,7 @@ export const SignInForm = () => {
         <Button
           type="submit"
           disabled={status === "executing"}
-          className="flex w-full gap-2"
+          className="w-full"
         >
           {status === "executing" ? (
             <div className="flex items-center">

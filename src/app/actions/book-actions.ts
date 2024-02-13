@@ -99,7 +99,7 @@ export const markBookAsNowReadingAction = async (bookId: number) => {
 
   await db
     .update(books)
-    .set({ status: "now_reading", read_at: null })
+    .set({ status: "now_reading", read_at: null, started_at: new Date() })
     .where(eq(books.id, bookId))
 
   revalidateTag("challenges")
@@ -108,7 +108,7 @@ export const markBookAsNowReadingAction = async (bookId: number) => {
 export const markBookAsWantToReadAction = async (bookId: number) => {
   await db
     .update(books)
-    .set({ status: "want_to_read", read_at: null })
+    .set({ status: "want_to_read", read_at: null, started_at: null })
     .where(eq(books.id, bookId))
 
   revalidateTag("challenges")

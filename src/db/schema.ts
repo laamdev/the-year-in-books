@@ -34,9 +34,10 @@ export const books = pgTable("books", {
   rating: integer("rating").notNull().default(0),
   pages: integer("pages").notNull().default(0),
   status: statusEnum("status").default("want_to_read").notNull(),
-  read_at: timestamp("read_at"),
   challenge_id: integer("challenge_id"),
   created_at: timestamp("created_at").defaultNow().notNull(),
+  read_at: timestamp("read_at"),
+  started_at: timestamp("started_at"),
 })
 
 export const challengesRelations = relations(challenges, ({ many }) => ({

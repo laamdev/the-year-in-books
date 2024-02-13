@@ -1,4 +1,4 @@
-import { format, getMonth } from "date-fns"
+import { differenceInDays, format, getMonth } from "date-fns"
 import Image from "next/image"
 
 import { getBook } from "@/app/actions/book-actions"
@@ -27,6 +27,13 @@ export default async function BookPage({
 
   if (book?.error) return <h1>{book.error}</h1>
   if (book?.success) {
+    const daysAgoCreated = differenceInDays(new Date(), book.success.created_at)
+    const daysAgoStarted = differenceInDays(
+      new Date(),
+      book.success.started_at!
+    )
+    const daysAgoRead = differenceInDays(new Date(), book.success.read_at!)
+
     return (
       <MaxWidthWrapper>
         <div className="mt-10 grid grid-cols-5 gap-x-5">
@@ -74,18 +81,69 @@ export default async function BookPage({
               </div>
             )}
 
-            <div className="mt-10 flex flex-col gap-y-5">
-              <div>
-                <p className="text-xs uppercase opacity-75">{`Author`}</p>
-                <h3 className="text-lg font-medium">{`${book.success.author}`}</h3>
+            <div className="mt-10 grid grid-cols-2 gap-10">
+              <div className="grid grid-rows-3 gap-5">
+                <div>
+                  <p className="text-xs uppercase opacity-75">{`Author`}</p>
+                  <h3 className="text-lg font-medium">{`${book.success.author}`}</h3>
+                </div>
+                <div>
+                  <p className="text-xs uppercase opacity-75">{`First Published`}</p>
+                  <h3 className="text-lg font-medium">{`${book.success.year}`}</h3>
+                </div>
+                <div>
+                  <p className="text-xs uppercase opacity-75">{`Pages`}</p>
+                  <h3 className="text-lg font-medium">{`${book.success.pages}`}</h3>
+                </div>
               </div>
-              <div>
-                <p className="text-xs uppercase opacity-75">{`First Published`}</p>
-                <h3 className="text-lg font-medium">{`${book.success.year}`}</h3>
-              </div>
-              <div>
-                <p className="text-xs uppercase opacity-75">{`Pages`}</p>
-                <h3 className="text-lg font-medium">{`${book.success.pages}`}</h3>
+
+              <div className="grid grid-rows-3 gap-5">
+                {book.success.created_at && (
+                  <div>
+                    <p className="text-xs uppercase opacity-75">{`Added at`}</p>
+                    <h3 className="text-lg font-medium">
+                      <span>
+                        {`${format(new Date(book.success.created_at!), "dd/MM/yyyy")}`}
+                      </span>
+                      <span className="ml-2 text-xs">
+                        ({daysAgoCreated === 0 && "Today"}{" "}
+                        {daysAgoCreated === 1 && `${daysAgoCreated} day ago`}
+                        {daysAgoCreated > 1 && `${daysAgoCreated} days ago`})
+                      </span>
+                    </h3>
+                  </div>
+                )}
+                {book.success.started_at && (
+                  <div>
+                    <p className="text-xs uppercase opacity-75">{`Started at`}</p>
+                    <h3 className="text-lg font-medium">
+                      <span>
+                        {`${format(new Date(book.success.started_at!), "dd/MM/yyyy")}`}
+                      </span>
+                      <span className="ml-2 text-xs">
+                        ({daysAgoCreated === 0 && "Today"}{" "}
+                        {daysAgoCreated === 1 && `${daysAgoStarted} day ago`}
+                        {daysAgoCreated > 1 && `${daysAgoStarted} days ago`})
+                      </span>
+                    </h3>
+                  </div>
+                )}
+                {book.success.read_at && (
+                  <div>
+                    <p className="text-xs uppercase opacity-75">{`Read at`}</p>
+                    <h3 className="text-lg font-medium">
+                      <span>
+                        {`${format(new Date(book.success.read_at!), "dd/MM/yyyy")}`}
+                      </span>
+
+                      <span className="ml-2 text-xs">
+                        ({daysAgoCreated === 0 && "Today"}{" "}
+                        {daysAgoCreated === 1 && `${daysAgoRead} day ago`}
+                        {daysAgoCreated > 1 && `${daysAgoRead} days ago`})
+                      </span>
+                    </h3>
+                  </div>
+                )}
               </div>
             </div>
           </div>

@@ -75,7 +75,9 @@ export default async function ChallengePage() {
           {/* <div>
             <Badge variant="secondary">{`Hello, ${user.firstName} ${user.lastName}`}</Badge>
           </div> */}
-          <Heading>{`${currentYear} Reading Challenge`}</Heading>
+          <Heading>
+            {`Hello, ${data.user.user_metadata.full_name ?? data.user.email}`}
+          </Heading>
         </div>
 
         <section className="mt-12 grid grid-cols-2 gap-3 md:grid-cols-5">
@@ -95,10 +97,10 @@ export default async function ChallengePage() {
                     <div className="w-full">
                       <div className="flex items-center justify-between">
                         <div>
-                          <h2 className="text-3xl font-medium">
-                            {`Hello, ${data.user.user_metadata.full_name}`}
+                          <h2 className="text-2xl font-medium">
+                            {`${currentYear} Reading Challenge`}
                           </h2>
-                          <h3 className="text-lg">
+                          <h3 className="text-primary text-lg">
                             <span>{`You've read `}</span>
                             <span className="font-semibold">{`${booksReadCount}`}</span>
                             <span>{` of `}</span>
