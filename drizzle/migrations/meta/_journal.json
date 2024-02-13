@@ -5,64 +5,22 @@
     {
       "idx": 0,
       "version": "5",
-      "when": 1705459531890,
-      "tag": "0000_tearful_jackal",
+      "when": 1707405202584,
+      "tag": "0000_fixed_stingray",
       "breakpoints": true
     },
     {
       "idx": 1,
       "version": "5",
-      "when": 1705460014277,
-      "tag": "0001_soft_tana_nile",
+      "when": 1707760706863,
+      "tag": "0001_cooing_mindworm",
       "breakpoints": true
     },
     {
       "idx": 2,
       "version": "5",
-      "when": 1705460602177,
-      "tag": "0002_harsh_xavin",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "5",
-      "when": 1705465630596,
-      "tag": "0003_graceful_killraven",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "5",
-      "when": 1705540650533,
-      "tag": "0004_talented_warbound",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "5",
-      "when": 1705604545950,
-      "tag": "0005_freezing_prism",
-      "breakpoints": true
-    },
-    {
-      "idx": 6,
-      "version": "5",
-      "when": 1705606491757,
-      "tag": "0006_next_speed",
-      "breakpoints": true
-    },
-    {
-      "idx": 7,
-      "version": "5",
-      "when": 1706566171736,
-      "tag": "0007_elite_proteus",
-      "breakpoints": true
-    },
-    {
-      "idx": 8,
-      "version": "5",
-      "when": 1706566631433,
-      "tag": "0008_complex_flatman",
+      "when": 1707769460590,
+      "tag": "0002_lazy_gorilla_man",
       "breakpoints": true
     }
   ]

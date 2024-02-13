@@ -1,13 +1,14 @@
 "use client"
 
+import { ArrowPathIcon } from "@heroicons/react/16/solid"
 import { useEffect, useRef } from "react"
 import { useFormState, useFormStatus } from "react-dom"
 
-import { createChallenge } from "@/app/_actions"
+import { createChallenge } from "@/app/actions/challenge-actions"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { useToast } from "@/components/ui/use-toast"
-import { currentYear } from "@/lib/utils"
+import { cn, currentYear } from "@/lib/utils"
 
 export const CreateChallengeForm = () => {
   const [state, formAction] = useFormState(createChallenge, null)
@@ -35,7 +36,7 @@ export const CreateChallengeForm = () => {
           <Input
             name="books_in_challenge_count"
             className="w-20"
-            placeholder="Enter a number"
+            placeholder="0"
           />
           <p>{`books in ${currentYear}.`}</p>
         </div>
@@ -59,7 +60,8 @@ const SubmitButton = () => {
       disabled={pending}
       className="mt-2.5 w-full disabled:cursor-not-allowed"
     >
-      {pending ? "Creating challenge..." : "Take the challenge"}
+      {pending && <ArrowPathIcon className={cn("mr-2 size-4 animate-spin")} />}
+      <span>{pending ? "Creating challenge..." : "Take the challenge"}</span>
     </Button>
   )
 }

@@ -39,3 +39,25 @@ export const DeleteChallengeFormSchema = z.object({
 export const RemoveBookFromChallengeFormSchema = z.object({
   id: z.coerce.number(),
 })
+
+export const SignUpFormSchema = z
+  .object({
+    email: z.coerce.string().email(),
+    password: z.coerce.string().min(3, {
+      message: "Password is required.",
+    }),
+    confirm: z.coerce.string().min(3, {
+      message: "Password is required.",
+    }),
+  })
+  .refine((data) => data.confirm === data.password, {
+    message: "Password did not match",
+    path: ["confirm"],
+  })
+
+export const SignInFormSchema = z.object({
+  email: z.coerce.string().email(),
+  password: z.coerce.string().min(3, {
+    message: "Password is required.",
+  }),
+})

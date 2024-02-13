@@ -29,7 +29,6 @@ export const fetchFilteredBooks = async (
     if (res.ok) {
       let data = await res.json()
       data.docs.forEach((book: ApiBook) => {
-        console.log(JSON.stringify(book, null, 2))
         books.push({
           title: book.title,
           author: book.author_name,

@@ -1,6 +1,8 @@
+import { format, getMonth } from "date-fns"
 import Image from "next/image"
 
-import { getBook } from "@/app/_actions"
+import { getBook } from "@/app/actions/book-actions"
+import { Rating } from "@/components/books/rating"
 import { RemoveBookFromChallengeDialog } from "@/components/books/remove-book-from-challenge-dialog"
 import { NowReadingButton } from "@/components/library/now-reading-button"
 import { ReadButton } from "@/components/library/read-button"
@@ -54,6 +56,15 @@ export default async function BookPage({
 
           <div className="col-span-4">
             <Heading>{book.success.title}</Heading>
+
+            {book?.success.status === "read" && (
+              <div className="mt-2.5">
+                <Rating
+                  bookId={book.success.id}
+                  bookRating={book.success.rating}
+                />
+              </div>
+            )}
 
             <div className="mt-10 flex flex-col gap-y-5">
               <div>

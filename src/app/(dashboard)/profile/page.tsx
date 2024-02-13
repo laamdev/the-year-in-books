@@ -1,19 +1,18 @@
-import { currentUser } from "@clerk/nextjs"
+import { cookies } from "next/headers"
 
+import { getChallengeAction } from "@/app/actions/challenge-actions"
+import { EmptyChallengeFeedback } from "@/components/challenge/empty-challenge-feedback"
 import { MaxWidthWrapper } from "@/components/max-width-wrapper"
-import { Heading } from "@/components/shared/heading"
+import { createClient } from "@/lib/supabase/server"
 
 export default async function ReadPage() {
-  //   const challenge = await getChallenge()
-  //   if (challenge?.error) return <h1>{challenge.error}</h1>
-  //   if (challenge?.success) {
-  //     const readBooks = challenge.success.books.filter((book) => book.is_read)
-  //     const readBooksCount = readBooks.length
-  const user = await currentUser()
+  const cookieStore = cookies()
+  const supabase = createClient(cookieStore)
+  const { data, error } = await supabase.auth.getUser()
+  const challenge = await getChallengeAction(data.user?.id)
+  if (challenge?.error) {
+    return <EmptyChallengeFeedback errorMessage={challenge.error} />
+  }
 
-  return (
-    <MaxWidthWrapper>
-      <Heading>{`${user?.firstName} ${user?.lastName}'s Profile`}</Heading>
-    </MaxWidthWrapper>
-  )
+  return <MaxWidthWrapper>xz </MaxWidthWrapper>
 }

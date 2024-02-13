@@ -1,4 +1,6 @@
-import { Book, Challenge } from "./db/schema"
+import { ReactElement } from "react"
+
+import { Book, Challenge } from "@/db/schema"
 
 export interface ApiBook {
   title: string
@@ -23,4 +25,26 @@ export interface ApiBookFormated {
 
 export interface ChallengeWithBooks extends Challenge {
   books: Book[]
+}
+
+export interface IconProps {
+  size?: number
+  color?: string
+}
+
+export interface RatingProps {
+  className?: string
+  count: number
+  value: number
+  color?: string
+  hoverColor?: string
+  activeColor?: string
+  size?: number
+  edit?: boolean
+  bookId: number
+  isHalf?: boolean
+  // // onChange?: (value: number) => void
+  emptyIcon?: ReactElement
+  halfIcon?: ReactElement
+  fullIcon?: ReactElement
 }

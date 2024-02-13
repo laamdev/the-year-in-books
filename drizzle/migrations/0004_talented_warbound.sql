@@ -1,1 +1,0 @@
-ALTER TABLE "books" DROP CONSTRAINT "books_version_unique";

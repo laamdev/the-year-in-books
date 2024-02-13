@@ -1,12 +1,22 @@
-import { getChallenge } from "@/app/_actions"
+import { cookies } from "next/headers"
+
+import { getChallengeAction } from "@/app/actions/challenge-actions"
 import { BookCarousel } from "@/components/books/book-carousel"
+import { EmptyChallengeFeedback } from "@/components/challenge/empty-challenge-feedback"
 import { MaxWidthWrapper } from "@/components/max-width-wrapper"
 import { Heading } from "@/components/shared/heading"
 import { Badge } from "@/components/ui/badge"
+import { createClient } from "@/lib/supabase/server"
 
 export default async function LibraryPage() {
-  const challenge = await getChallenge()
-  if (challenge?.error) return <h1>{challenge.error}</h1>
+  const cookieStore = cookies()
+  const supabase = createClient(cookieStore)
+  const { data, error } = await supabase.auth.getUser()
+
+  const challenge = await getChallengeAction(data.user?.id)
+  if (challenge?.error) {
+    return <EmptyChallengeFeedback errorMessage={challenge.error} />
+  }
   if (challenge?.success) {
     const books = challenge.success.books
     const readBooks = books.filter((book) => book.status === "read")

@@ -1,6 +1,6 @@
 {
-  "id": "ed251c14-af7f-4118-9969-1bc3e9ff3a31",
-  "prevId": "fd81ac57-8fcb-4d96-831f-142b2d89b2a6",
+  "id": "a1ed26be-7666-4478-9801-a4c6ff306c77",
+  "prevId": "eb92a784-3e9c-48e8-ab14-79c128de7406",
   "version": "5",
   "dialect": "pg",
   "tables": {
@@ -45,6 +45,13 @@
           "notNull": true,
           "default": 0
         },
+        "rating": {
+          "name": "rating",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
         "pages": {
           "name": "pages",
           "type": "integer",
@@ -52,32 +59,37 @@
           "notNull": true,
           "default": 0
         },
-        "completed": {
-          "name": "completed",
-          "type": "boolean",
+        "status": {
+          "name": "status",
+          "type": "status",
           "primaryKey": false,
           "notNull": true,
-          "default": false
+          "default": "'want_to_read'"
+        },
+        "read_at": {
+          "name": "read_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
         },
         "challenge_id": {
           "name": "challenge_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
         }
       },
       "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "books_version_unique": {
-          "name": "books_version_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "version"
-          ]
-        }
-      }
+      "uniqueConstraints": {}
     },
     "challenges": {
       "name": "challenges",
@@ -95,12 +107,19 @@
           "primaryKey": false,
           "notNull": true
         },
-        "book_count": {
-          "name": "book_count",
+        "books_in_challenge_count": {
+          "name": "books_in_challenge_count",
           "type": "integer",
           "primaryKey": false,
           "notNull": true,
           "default": 0
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
         }
       },
       "indexes": {},
@@ -117,7 +136,16 @@
       }
     }
   },
-  "enums": {},
+  "enums": {
+    "status": {
+      "name": "status",
+      "values": {
+        "want_to_read": "want_to_read",
+        "now_reading": "now_reading",
+        "read": "read"
+      }
+    }
+  },
   "schemas": {},
   "_meta": {
     "columns": {},

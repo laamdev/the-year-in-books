@@ -11,13 +11,16 @@ declare global {
 let db: PostgresJsDatabase<typeof schema>
 
 if (process.env.NODE_ENV === "production") {
-  db = drizzle(postgres(process.env.DATABASE_URL!, { prepare: false }), {
-    schema,
-  })
+  db = drizzle(
+    postgres(process.env.NEXT_PUBLIC_SUPABASE_DB!, { prepare: false }),
+    {
+      schema,
+    }
+  )
 } else {
   if (!global.db) {
     global.db = drizzle(
-      postgres(process.env.DATABASE_URL!, { prepare: false }),
+      postgres(process.env.NEXT_PUBLIC_SUPABASE_DB!, { prepare: false }),
       { schema }
     )
   }

@@ -1,7 +1,6 @@
 import { relations } from "drizzle-orm"
 import {
   bigint,
-  boolean,
   integer,
   pgEnum,
   pgTable,
@@ -32,11 +31,12 @@ export const books = pgTable("books", {
   cover: varchar("cover", { length: 256 }).notNull(),
   version: bigint("version", { mode: "number" }).notNull(),
   year: integer("year").notNull().default(0),
+  rating: integer("rating").notNull().default(0),
   pages: integer("pages").notNull().default(0),
   status: statusEnum("status").default("want_to_read").notNull(),
+  read_at: timestamp("read_at"),
   challenge_id: integer("challenge_id"),
   created_at: timestamp("created_at").defaultNow().notNull(),
-  // // read_at: timestamp("read_at"),
 })
 
 export const challengesRelations = relations(challenges, ({ many }) => ({

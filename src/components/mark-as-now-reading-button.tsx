@@ -3,7 +3,7 @@
 import { ArrowPathIcon, BookOpenIcon } from "@heroicons/react/16/solid"
 import { useTransition } from "react"
 
-import { markAsNowReading } from "@/app/_actions"
+import { markBookAsNowReadingAction } from "@/app/actions/book-actions"
 import { useToast } from "@/components/ui/use-toast"
 import { Book } from "@/db/schema"
 import { cn } from "@/lib/utils"
@@ -31,7 +31,7 @@ export const MarkAsNowReadingButton = ({ book }: { book: Book }) => {
       onClick={() =>
         startTransition(async () => {
           try {
-            await markAsNowReading(book.id)
+            await markBookAsNowReadingAction(book.id)
             await triggerToastSuccess()
           } catch (error) {
             await triggerToastError()

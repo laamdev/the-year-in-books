@@ -8,7 +8,7 @@ import { Dispatch, SetStateAction } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
-import { removeBookFromChallenge } from "@/app/_actions"
+import { removeBookFromChallenge } from "@/app/actions/book-actions"
 import { Button } from "@/components/ui/button"
 import { Form } from "@/components/ui/form"
 import { useToast } from "@/components/ui/use-toast"

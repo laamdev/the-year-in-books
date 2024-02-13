@@ -1,14 +1,11 @@
 import "./globals.css"
 
-import { ClerkProvider } from "@clerk/nextjs"
 import type { Metadata } from "next"
 import localFont from "next/font/local"
 import { ReactNode } from "react"
 
 import { Header } from "@/components/navigation/header"
-import { Sidebar } from "@/components/navigation/sidebar"
-import { Toaster } from "@/components/ui/toaster"
-import { TooltipProvider } from "@/components/ui/tooltip"
+import { Providers } from "@/components/shared/providers"
 import { cn } from "@/lib/utils"
 
 const eiko = localFont({
@@ -193,25 +190,22 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <ClerkProvider>
-      <html lang="en" className="h-full">
-        <body
-          className={cn(
-            "relative h-screen font-sans antialiased",
-            eiko.variable,
-            mori.variable
-          )}
-        >
-          {/* <AnalyticsPageView /> */}
-          <TooltipProvider delayDuration={0}>
-            <main className="relative flex min-h-screen flex-col bg-gradient-to-bl from-neutral-800 via-neutral-900 to-black ">
-              <Header />
-              <div className="flex-1 grow">{children}</div>
-            </main>
-          </TooltipProvider>
-          <Toaster />
-        </body>
-      </html>
-    </ClerkProvider>
+    <html lang="en" className="h-full">
+      <body
+        className={cn(
+          "relative h-screen font-sans antialiased",
+          eiko.variable,
+          mori.variable
+        )}
+      >
+        {/* <AnalyticsPageView /> */}
+        <Providers>
+          <main className="relative flex min-h-screen flex-col">
+            <Header />
+            <div className="flex-1 grow">{children}</div>
+          </main>
+        </Providers>
+      </body>
+    </html>
   )
 }

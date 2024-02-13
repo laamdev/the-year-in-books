@@ -36,7 +36,7 @@ export const BookCarousel = ({ title, emptyMsg, count, books }: Props) => {
           <CarouselContent className="-ml-2 md:-ml-4">
             {books.map((book) => (
               <Suspense key={book.id} fallback={<BookCardSkeleton />}>
-                <CarouselItem className="relative basis-1/2 pl-4 md:basis-1/3 md:pl-4 lg:basis-1/5">
+                <CarouselItem className="relative basis-1/2 pl-4 md:basis-1/3 md:pl-4 lg:basis-1/4">
                   <BookCard book={book} />
                 </CarouselItem>
               </Suspense>

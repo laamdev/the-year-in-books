@@ -1,13 +1,12 @@
 "use client"
 
 import {
-  BarChart2Icon,
-  BookCopyIcon,
-  LibraryIcon,
-  LogOutIcon,
-  PlusIcon,
-  UserIcon,
-} from "lucide-react"
+  ArrowRightStartOnRectangleIcon,
+  ChartBarIcon,
+  PlusCircleIcon,
+  TrophyIcon,
+  ViewColumnsIcon,
+} from "@heroicons/react/16/solid"
 import Link from "next/link"
 import { useRef, useState } from "react"
 import { ImperativePanelHandle } from "react-resizable-panels"
@@ -53,6 +52,7 @@ export const Sidebar = ({
           }
         }}
         className={cn(
+          "bg-card",
           isCollapsed && "min-w-[50px] transition-all duration-300 ease-in-out"
         )}
       >
@@ -98,48 +98,48 @@ export const Sidebar = ({
               title: "Challenge",
               href: "/challenge",
               label: booksInChallengeCount,
-              icon: LibraryIcon,
+              icon: TrophyIcon,
               variant: "ghost",
             },
             {
               title: "Library",
               href: "/library",
-              label: booksCount,
-              icon: BookCopyIcon,
+              label: booksCount.toString(),
+              icon: ViewColumnsIcon,
               variant: "ghost",
             },
             {
               title: "Add Books",
               href: "/add-books",
               label: "",
-              icon: PlusIcon,
+              icon: PlusCircleIcon,
               variant: "ghost",
             },
+            // // {
+            // //   title: "Stats",
+            // //   href: "/stats",
+            // //   // // label: booksCount,
+            // //   icon: ChartBarIcon,
+            // //   variant: "ghost",
+            // // },
           ]}
         />
         <Separator />
         <Nav
           isCollapsed={isCollapsed}
           links={[
-            {
-              title: "Stats",
-              href: "/stats",
-              // // label: booksCount,
-              icon: BarChart2Icon,
-              variant: "ghost",
-            },
-            {
-              title: "Profile",
-              href: "/profile",
-              // // label: booksCount,
-              icon: UserIcon,
-              variant: "ghost",
-            },
+            // // {
+            // //   title: "Profile",
+            // //   href: "/profile",
+            // //   // // label: booksCount,
+            // //   icon: UserCircleIcon,
+            // //   variant: "ghost",
+            // // },
             {
               title: "Log Out",
-              href: "/",
+              href: "",
               // // label: booksInChallengeCount,
-              icon: LogOutIcon,
+              icon: ArrowRightStartOnRectangleIcon,
               variant: "ghost",
             },
           ]}

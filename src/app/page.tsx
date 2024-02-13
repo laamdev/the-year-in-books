@@ -1,14 +1,20 @@
-import { SignedIn, SignedOut } from "@clerk/nextjs"
-import { SignOutButton } from "@clerk/nextjs"
+import { cookies } from "next/headers"
 import Image from "next/image"
 import Link from "next/link"
 
+import { SignOutForm } from "@/components/auth/sign-out-form"
 import { MaxWidthWrapper } from "@/components/max-width-wrapper"
 import { Badge } from "@/components/ui/badge"
-import { Button, buttonVariants } from "@/components/ui/button"
-import { currentYear } from "@/lib/utils"
+import { buttonVariants } from "@/components/ui/button"
+import { createClient } from "@/lib/supabase/server"
+import { currentYear, getTimestamp } from "@/lib/utils"
 
-export default function HomePage() {
+export default async function HomePage() {
+  const cookieStore = cookies()
+  const supabase = createClient(cookieStore)
+
+  const { data, error } = await supabase.auth.getUser()
+
   return (
     <MaxWidthWrapper className="grid gap-y-20 md:h-screen md:grid-cols-2 md:place-content-center md:gap-x-10">
       <div className="">
@@ -19,24 +25,18 @@ export default function HomePage() {
             <span>{`The Year`}</span>
             <span>{`in Books`}</span>
           </h1>
-          <p className="mt-2.5 max-w-lg text-lg md:mt-5 md:text-xl">{`Want to motivate yourself to read more in ${currentYear}? Join our annual reading challenge and fall in love with reading again — your new favourite book may still be in your backlog!`}</p>
+          <p className="mt-2.5 max-w-lg text-lg md:mt-5 md:text-xl">{`Want to motivate yourself to read more in ${currentYear}? Join our annual reading challenge and fall back in love with reading — your new favourite book may still be in your backlog!`}</p>
         </div>
 
-        <div className="mt-5 flex gap-x-5 md:mt-10">
-          <SignedIn>
-            <Link
-              href="/challenge"
-              className={buttonVariants({ className: "" })}
-            >{`Your Challenge`}</Link>
-            <Button variant="secondary" className="min-w-[90px]">
-              <SignOutButton>{`Sign Out`}</SignOutButton>
-            </Button>
-          </SignedIn>
-          <SignedOut>
+        {!data.user && (
+          <div className="mt-5 flex gap-x-5 md:mt-10">
             <Link
               href="/sign-in"
-              className={buttonVariants({ className: "" })}
-            >{`Log In`}</Link>
+              className={buttonVariants({
+                className: "",
+                variant: "default",
+              })}
+            >{`Sign In`}</Link>
             <Link
               href="/sign-up"
               className={buttonVariants({
@@ -44,8 +44,20 @@ export default function HomePage() {
                 variant: "secondary",
               })}
             >{`Sign Up`}</Link>
-          </SignedOut>
-        </div>
+          </div>
+        )}
+        {data.user && (
+          <div className="mt-5 flex gap-x-5 md:mt-10">
+            <Link
+              href="/challenge"
+              className={buttonVariants({
+                className: "",
+                variant: "default",
+              })}
+            >{`Your Challenge`}</Link>
+            <SignOutForm />
+          </div>
+        )}
       </div>
       <div>
         <Image

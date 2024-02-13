@@ -5,7 +5,7 @@ import { redirect } from "next/navigation"
 import { useEffect } from "react"
 import { useFormState, useFormStatus } from "react-dom"
 
-import { addBook } from "@/app/_actions"
+import { addBookToChallengeAction } from "@/app/actions/book-actions"
 import { Button } from "@/components/ui/button"
 import { useToast } from "@/components/ui/use-toast"
 import { Book, Challenge } from "@/db/schema"
@@ -28,11 +28,16 @@ export const AddBookForm = ({
     challenge_id: challenge.id,
     status: "want_to_read",
   }
-  // @ts-expect-error
-  const addBookWithSelectedBook = addBook.bind(null, bookToAdd)
 
-  // @ts-expect-error
-  const [state, formAction] = useFormState(addBookWithSelectedBook, null)
+  const addBookToChallengeWithSelectedBookAction =
+    //@ts-expect-error
+    addBookToChallengeAction.bind(null, bookToAdd)
+
+  const [state, formAction] = useFormState(
+    //@ts-expect-error
+    addBookToChallengeWithSelectedBookAction,
+    null
+  )
   const { toast } = useToast()
 
   // @ts-expect-error
@@ -58,7 +63,6 @@ export const AddBookForm = ({
 
   return (
     <form action={formAction}>
-      {/* // @ts-expect-error */}
       <SubmitButton booksVersions={booksVersions} selectedBook={selectedBook} />
     </form>
   )

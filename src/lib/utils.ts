@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx"
 import { differenceInHours, endOfYear, getDayOfYear } from "date-fns"
+import { format } from "date-fns"
 import { twMerge } from "tailwind-merge"
 
 export const cn = (...inputs: ClassValue[]) => {
@@ -65,4 +66,9 @@ export const getBookSchedule = (
   const result = booksYouShouldHaveRead - booksRead
 
   return result
+}
+
+export const getTimestamp = () => {
+  const date = format(new Date(), "MM/dd/yyyy kk:mm:ss")
+  return date
 }

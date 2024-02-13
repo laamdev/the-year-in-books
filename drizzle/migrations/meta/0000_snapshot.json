@@ -1,5 +1,5 @@
 {
-  "id": "0a9b8244-0dcd-4f2b-8b27-fdce4abf2773",
+  "id": "78fc2140-b43a-4089-819a-fd30ba801fdf",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -32,6 +32,12 @@
           "primaryKey": false,
           "notNull": true
         },
+        "version": {
+          "name": "version",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
         "year": {
           "name": "year",
           "type": "integer",
@@ -46,32 +52,31 @@
           "notNull": true,
           "default": 0
         },
-        "completed": {
-          "name": "completed",
-          "type": "boolean",
+        "status": {
+          "name": "status",
+          "type": "status",
           "primaryKey": false,
           "notNull": true,
-          "default": false
+          "default": "'want_to_read'"
         },
         "challenge_id": {
           "name": "challenge_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
         }
       },
       "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "books_year_unique": {
-          "name": "books_year_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "year"
-          ]
-        }
-      }
+      "uniqueConstraints": {}
     },
     "challenges": {
       "name": "challenges",
@@ -89,12 +94,19 @@
           "primaryKey": false,
           "notNull": true
         },
-        "book_count": {
-          "name": "book_count",
+        "books_in_challenge_count": {
+          "name": "books_in_challenge_count",
           "type": "integer",
           "primaryKey": false,
           "notNull": true,
           "default": 0
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
         }
       },
       "indexes": {},
@@ -111,7 +123,16 @@
       }
     }
   },
-  "enums": {},
+  "enums": {
+    "status": {
+      "name": "status",
+      "values": {
+        "want_to_read": "want_to_read",
+        "now_reading": "now_reading",
+        "read": "read"
+      }
+    }
+  },
   "schemas": {},
   "_meta": {
     "columns": {},

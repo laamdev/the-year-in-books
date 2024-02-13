@@ -3,7 +3,7 @@
 import { ArrowPathIcon, ClockIcon } from "@heroicons/react/16/solid"
 import { useTransition } from "react"
 
-import { markAsWantToRead } from "@/app/_actions"
+import { markBookAsWantToReadAction } from "@/app/actions/book-actions"
 import { Button } from "@/components/ui/button"
 import { useToast } from "@/components/ui/use-toast"
 import { cn } from "@/lib/utils"
@@ -38,7 +38,7 @@ export const WantToReadButton = ({ id, title, status }: Props) => {
       onClick={() =>
         startTransition(async () => {
           try {
-            await markAsWantToRead(id)
+            await markBookAsWantToReadAction(id)
             await triggerToastSuccess()
           } catch (error) {
             await triggerToastError()
