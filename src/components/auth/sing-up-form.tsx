@@ -129,15 +129,15 @@ export const SignUpForm = () => {
         <Button
           type="submit"
           disabled={status === "executing"}
-          className="flex w-full gap-2"
+          className="w-full"
         >
           {status === "executing" ? (
-            <span className="flex items-center gap-x-1.5">
-              {`Signing Up...`}
+            <div className="flex items-center">
               <ArrowPathIcon className="size-4 animate-spin" />
-            </span>
+              <span>{`Signing up...`}</span>
+            </div>
           ) : (
-            <span>{`Sign Up`}</span>
+            <span>{`Sign up`}</span>
           )}
         </Button>
       </form>

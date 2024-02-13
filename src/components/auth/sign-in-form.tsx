@@ -113,10 +113,10 @@ export const SignInForm = () => {
           className="flex w-full gap-2"
         >
           {status === "executing" ? (
-            <span className="flex items-center gap-x-1.5">
-              {`Signing in...`}
-              <ArrowPathIcon className="size-4 animate-spin" />
-            </span>
+            <div className="flex items-center">
+              <ArrowPathIcon className="mr-2 size-4 animate-spin" />
+              <span>{`Signing in...`}</span>
+            </div>
           ) : (
             <span>{`Sign in`}</span>
           )}
