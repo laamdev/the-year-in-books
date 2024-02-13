@@ -10,6 +10,14 @@ import { WantToReadButton } from "@/components/library/want-to-read-button"
 import { MaxWidthWrapper } from "@/components/max-width-wrapper"
 import { Heading } from "@/components/shared/heading"
 
+export async function generateMetadata({ params }: { params: { id: number } }) {
+  const book = await getBook(params.id)
+  if (book?.error) return console.log(book.error)
+  if (book?.success) {
+    return { title: book.success.title }
+  }
+}
+
 export default async function BookPage({
   params: { id },
 }: {

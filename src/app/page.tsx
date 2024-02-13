@@ -43,7 +43,7 @@ export default async function HomePage() {
                 className: "",
                 variant: "secondary",
               })}
-            >{`Sign Up`}</Link>
+            >{`Sign up`}</Link>
           </div>
         )}
         {data.user && (
