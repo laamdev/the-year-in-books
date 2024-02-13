@@ -71,12 +71,12 @@ export const DeleteChallengeForm = ({ setOpen, challengeId }: Props) => {
             variant="destructive"
           >
             {status === "executing" ? (
-              <span className="flex items-center gap-x-1.5">
-                {`Deleting...`}
+              <span className="flex items-center">
                 <ArrowPathIcon className="size-4 animate-spin" />
+                <span className="ml-2">{`Remove...`}</span>
               </span>
             ) : (
-              <span>Delete</span>
+              <span>{`Remove`}</span>
             )}
           </Button>
         </form>

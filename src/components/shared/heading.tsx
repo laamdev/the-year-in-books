@@ -1,7 +1,22 @@
 import { ReactNode } from "react"
+import Balancer from "react-wrap-balancer"
 
-export const Heading = ({ children }: { children: ReactNode }) => {
+import { cn } from "@/lib/utils"
+
+export const Heading = ({
+  className,
+  children,
+}: {
+  className?: string
+  children: ReactNode
+}) => {
   return (
-    <h1 className="font-serif text-4xl font-bold md:text-5xl">{children}</h1>
+    <Balancer>
+      <h1
+        className={cn(className, "font-serif text-4xl font-bold md:text-5xl")}
+      >
+        {children}
+      </h1>
+    </Balancer>
   )
 }

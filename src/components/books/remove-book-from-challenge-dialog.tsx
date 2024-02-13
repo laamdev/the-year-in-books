@@ -34,7 +34,7 @@ export const RemoveBookFromChallengeDialog = ({ id, title }: Props) => {
         )}
       >
         <TrashIcon className="mr-2 size-4" />
-        <span>{`Delete`}</span>
+        <span>{`Remove`}</span>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader className="space-y-2.5">

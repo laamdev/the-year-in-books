@@ -1,6 +1,8 @@
 import { MoreHorizontalIcon, XIcon } from "lucide-react"
+import { cookies } from "next/headers"
 import Link from "next/link"
 
+import { Logo } from "@/components/shared/logo"
 import {
   Drawer,
   DrawerClose,
@@ -11,38 +13,64 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer"
-export const Header = () => {
+import { createClient } from "@/lib/supabase/server"
+
+export const Header = async () => {
+  const cookieStore = cookies()
+  const supabase = createClient(cookieStore)
+
+  const { data, error } = await supabase.auth.getUser()
+
   return (
-    <div className="flex justify-end px-2 py-4 md:hidden">
+    <div className="flex justify-between px-2.5 py-5 md:hidden">
+      <Link href="/">
+        <Logo className="stroke-primary size-8" />
+      </Link>
       <Drawer direction="right">
         <DrawerTrigger>
           <MoreHorizontalIcon className="size-8" />
         </DrawerTrigger>
-        <DrawerContent className="bg-primary h-full w-[400px] px-2 py-4">
-          <DrawerClose className="flex justify-end">
+        <DrawerContent className="bg-muted size-full">
+          <DrawerClose className="flex justify-end p-2.5">
             <XIcon className="size-8" />
           </DrawerClose>
 
-          <div className="mt-8 flex h-full items-center">
+          <div className="flex h-full items-center p-5">
             <nav>
-              <ul className="flex flex-col gap-y-8 font-serif text-4xl font-medium text-black">
-                <li>
-                  <Link href="/challenge">
-                    <DrawerClose>Challenge</DrawerClose>
-                  </Link>
-                </li>
-                <Link href="/library">
-                  <DrawerClose>Library</DrawerClose>
-                </Link>
-                <Link href="/read">
-                  <DrawerClose>Read</DrawerClose>
-                </Link>
-                <Link href="/now-reading">
-                  <DrawerClose>Now Reading</DrawerClose>
-                </Link>
-                <Link href="/want-to-read">
-                  <DrawerClose>Want to Read</DrawerClose>
-                </Link>
+              <ul className="text-foreground flex flex-col gap-y-10 font-serif text-5xl font-medium">
+                {data.user && (
+                  <>
+                    <li>
+                      <Link href="/challenge">
+                        <DrawerClose>{`Challenge`}</DrawerClose>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/library">
+                        <DrawerClose>{`Library`}</DrawerClose>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/add-books">
+                        <DrawerClose>{`Add Book`}</DrawerClose>
+                      </Link>
+                    </li>
+                  </>
+                )}
+                {!data.user && (
+                  <>
+                    <li>
+                      <Link href="/sign-in">
+                        <DrawerClose>{`Sign in`}</DrawerClose>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/sign-up">
+                        <DrawerClose>{`Sign up`}</DrawerClose>
+                      </Link>
+                    </li>
+                  </>
+                )}
               </ul>
             </nav>
           </div>

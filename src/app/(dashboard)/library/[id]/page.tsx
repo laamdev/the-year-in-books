@@ -36,9 +36,22 @@ export default async function BookPage({
 
     return (
       <MaxWidthWrapper>
-        <div className="mt-10 grid grid-cols-5 gap-x-5">
-          <div className="col-span-1">
-            <div className="relative aspect-[3/5] h-min overflow-hidden rounded-md shadow ">
+        <div className="grid grid-cols-1 md:mt-10 md:grid-cols-7 md:gap-x-10">
+          <div className="col-span-2 mx-auto w-full">
+            <div className="flex flex-col items-center md:hidden">
+              <Heading>{book.success.title}</Heading>
+
+              {book?.success.status === "read" && (
+                <div className="mt-2.5">
+                  <Rating
+                    bookId={book.success.id}
+                    bookRating={book.success.rating}
+                  />
+                </div>
+              )}
+            </div>
+
+            <div className="relative mx-auto mt-5 aspect-[3/5] h-min w-2/3 overflow-hidden rounded-md shadow md:mt-0 md:w-full ">
               <Image
                 src={book.success.cover}
                 alt={book.success.title}
@@ -46,7 +59,7 @@ export default async function BookPage({
                 className="bg-primary/10 tw-transition rounded-md object-cover object-center group-hover:scale-105"
               />
             </div>
-            <div className="mt-5 flex flex-col gap-y-2.5">
+            <div className="mx-auto mt-5 flex w-2/3 flex-col gap-y-2.5 md:w-full">
               <ReadButton
                 id={book.success.id}
                 title={book.success.title}
@@ -69,17 +82,19 @@ export default async function BookPage({
             </div>
           </div>
 
-          <div className="col-span-4">
-            <Heading>{book.success.title}</Heading>
+          <div className="col-span-5">
+            <div className="hidden md:flex md:flex-col">
+              <Heading>{book.success.title}</Heading>
 
-            {book?.success.status === "read" && (
-              <div className="mt-2.5">
-                <Rating
-                  bookId={book.success.id}
-                  bookRating={book.success.rating}
-                />
-              </div>
-            )}
+              {book?.success.status === "read" && (
+                <div className="mt-2.5">
+                  <Rating
+                    bookId={book.success.id}
+                    bookRating={book.success.rating}
+                  />
+                </div>
+              )}
+            </div>
 
             <div className="mt-10 grid grid-cols-2 gap-10">
               <div className="grid grid-rows-3 gap-5">
@@ -106,7 +121,7 @@ export default async function BookPage({
                         {`${format(new Date(book.success.created_at!), "dd/MM/yyyy")}`}
                       </span>
                       <span className="ml-2 text-xs">
-                        ({daysAgoCreated === 0 && "Today"}{" "}
+                        ({daysAgoCreated === 0 && "Today"}
                         {daysAgoCreated === 1 && `${daysAgoCreated} day ago`}
                         {daysAgoCreated > 1 && `${daysAgoCreated} days ago`})
                       </span>
@@ -137,7 +152,7 @@ export default async function BookPage({
                       </span>
 
                       <span className="ml-2 text-xs">
-                        ({daysAgoCreated === 0 && "Today"}{" "}
+                        ({daysAgoCreated === 0 && "Today"}
                         {daysAgoCreated === 1 && `${daysAgoRead} day ago`}
                         {daysAgoCreated > 1 && `${daysAgoRead} days ago`})
                       </span>
