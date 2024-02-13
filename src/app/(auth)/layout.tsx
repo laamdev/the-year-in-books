@@ -5,11 +5,11 @@ import { Quote } from "@/components/auth/quote"
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="grid h-screen grid-cols-2">
-      <div className="bg-muted relative hidden h-full flex-col p-10 text-white lg:flex dark:border-r">
+    <div className="grid h-screen grid-cols-3">
+      <div className="bg-muted relative col-span-2 hidden h-full flex-col p-10 text-white lg:flex dark:border-r">
         <CoverImage />
 
-        <div className="text-branding-green relative z-20 mt-auto">
+        <div className="relative z-20 mt-auto">
           <Quote />
         </div>
       </div>

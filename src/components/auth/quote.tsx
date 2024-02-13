@@ -16,7 +16,7 @@ export const Quote = () => {
         }
 
   return (
-    <blockquote className="space-y-2 rounded-md bg-black/75 p-5 shadow">
+    <blockquote className="bg-muted/75 space-y-2 rounded-md p-5 shadow">
       <p className="text-lg font-semibold">{quote.body}</p>
       <footer className="text-sm">–{quote.author}</footer>
     </blockquote>

@@ -7,7 +7,7 @@ import { MaxWidthWrapper } from "@/components/max-width-wrapper"
 import { Badge } from "@/components/ui/badge"
 import { buttonVariants } from "@/components/ui/button"
 import { createClient } from "@/lib/supabase/server"
-import { currentYear, getTimestamp } from "@/lib/utils"
+import { currentYear } from "@/lib/utils"
 
 export default async function HomePage() {
   const cookieStore = cookies()

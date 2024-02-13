@@ -1,3 +1,4 @@
+import { Metadata } from "next"
 import { cookies } from "next/headers"
 
 import { getChallengeAction } from "@/app/actions/challenge-actions"
@@ -6,6 +7,10 @@ import { MonthBarChart } from "@/components/charts/month-bar-chart"
 import { MaxWidthWrapper } from "@/components/max-width-wrapper"
 import { Heading } from "@/components/shared/heading"
 import { createClient } from "@/lib/supabase/server"
+
+export const metadata: Metadata = {
+  title: "Stats",
+}
 
 export default async function StatsPage() {
   const cookieStore = cookies()

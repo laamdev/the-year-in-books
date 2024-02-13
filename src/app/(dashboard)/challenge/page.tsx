@@ -1,4 +1,4 @@
-import { format } from "date-fns"
+import { Metadata } from "next"
 import { cookies } from "next/headers"
 import Link from "next/link"
 import { redirect } from "next/navigation"
@@ -9,13 +9,16 @@ import { EditChallengeDialog } from "@/components/dialogs/edit-challenge-dialog"
 import { CreateChallengeForm } from "@/components/forms/create-challenge-form"
 import { MaxWidthWrapper } from "@/components/max-width-wrapper"
 import { Heading } from "@/components/shared/heading"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { Book } from "@/db/schema"
 import { createClient } from "@/lib/supabase/server"
 import { currentYear, getBookSchedule, timeLeft } from "@/lib/utils"
+
+export const metadata: Metadata = {
+  title: "Challenge",
+}
 
 export default async function ChallengePage() {
   const cookieStore = cookies()

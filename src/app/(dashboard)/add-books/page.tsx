@@ -1,3 +1,4 @@
+import { Metadata } from "next"
 import { cookies } from "next/headers"
 import { Suspense } from "react"
 
@@ -12,6 +13,10 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { Book } from "@/db/schema"
 import { fetchFilteredBooks, ITEMS_PER_PAGE } from "@/lib/data"
 import { createClient } from "@/lib/supabase/server"
+
+export const metadata: Metadata = {
+  title: "Add a Book",
+}
 
 export default async function AddPage({
   searchParams,

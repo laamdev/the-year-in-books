@@ -1,3 +1,4 @@
+import { Metadata } from "next"
 import { cookies } from "next/headers"
 
 import { getChallengeAction } from "@/app/actions/challenge-actions"
@@ -7,6 +8,10 @@ import { MaxWidthWrapper } from "@/components/max-width-wrapper"
 import { Heading } from "@/components/shared/heading"
 import { Badge } from "@/components/ui/badge"
 import { createClient } from "@/lib/supabase/server"
+
+export const metadata: Metadata = {
+  title: "Library",
+}
 
 export default async function LibraryPage() {
   const cookieStore = cookies()

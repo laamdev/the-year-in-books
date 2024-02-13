@@ -6,6 +6,7 @@ import { ReactNode } from "react"
 
 import { Header } from "@/components/navigation/header"
 import { Providers } from "@/components/shared/providers"
+import { siteConfig } from "@/lib/constants"
 import { cn } from "@/lib/utils"
 
 const eiko = localFont({
@@ -183,9 +184,64 @@ const mori = localFont({
 })
 
 export const metadata: Metadata = {
-  title: "The Year in Books",
-  description:
-    "An annual reading challenge that helps you rediscover your love for books.",
+  metadataBase: new URL(siteConfig.links.site),
+  title: {
+    template: `%s - ${siteConfig.name}`,
+    default: siteConfig.name,
+  },
+  description: siteConfig.description,
+  icons: {
+    icon: "/favicons/favicon.ico",
+    shortcut: "/favicons/favicon-16x16.png",
+    apple: "/favicons/apple-touch-icon.png",
+  },
+  manifest: `${siteConfig.links.site}/manifest.json`,
+  openGraph: {
+    title: siteConfig.name,
+    description: siteConfig.description,
+    url: siteConfig.links.site,
+    siteName: siteConfig.name,
+    images: [
+      {
+        url: "https://nextjs.org/og.png",
+        width: 800,
+        height: 600,
+      },
+      {
+        url: "https://nextjs.org/og-alt.png",
+        width: 1800,
+        height: 1600,
+        alt: "My custom alt",
+      },
+    ],
+    locale: "en_GB",
+    type: "website",
+  },
+  robots: {
+    index: false,
+    follow: true,
+    nocache: true,
+    googleBot: {
+      index: true,
+      follow: false,
+      noimageindex: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.name,
+    description: siteConfig.description,
+    // // siteId: "1467726470533754880",
+    creator: "@laam_dev",
+    // // creatorId: "1467726470533754880",
+    images: {
+      url: `${siteConfig.links.site}/og.png`,
+      alt: siteConfig.name,
+    },
+  },
 }
 
 export default function RootLayout({ children }: { children: ReactNode }) {
