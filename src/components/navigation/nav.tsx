@@ -1,21 +1,19 @@
 "use client"
 
 import { LucideIcon } from "lucide-react"
-import { revalidatePath } from "next/cache"
 import Link from "next/link"
-import { redirect, useRouter } from "next/navigation"
+import { useRouter } from "next/navigation"
+import { usePathname } from "next/navigation"
 
 import { signOutAction } from "@/app/actions/auth-actions"
-import { Button, buttonVariants } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { buttonVariants } from "@/components/ui/button"
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { createClient } from "@/lib/supabase/client"
 import { cn } from "@/lib/utils"
-
-import { Badge } from "../ui/badge"
 
 interface NavProps {
   isCollapsed: boolean
@@ -30,6 +28,7 @@ interface NavProps {
 
 export const Nav = ({ links, isCollapsed }: NavProps) => {
   const router = useRouter()
+  const pathname = usePathname()
 
   return (
     <div
@@ -51,7 +50,11 @@ export const Nav = ({ links, isCollapsed }: NavProps) => {
                         "dark:bg-muted dark:text-muted-foreground dark:hover:bg-muted dark:hover:text-white"
                     )}
                   >
-                    <link.icon className="size-4" />
+                    <link.icon
+                      className={cn("size-4", {
+                        "fill-primary": link.href === pathname,
+                      })}
+                    />
                     <span className="sr-only">{`${link.title}`}</span>
                   </Link>
                 ) : (
@@ -92,7 +95,11 @@ export const Nav = ({ links, isCollapsed }: NavProps) => {
                     "justify-start"
                   )}
                 >
-                  <link.icon className="mr-2 size-4" />
+                  <link.icon
+                    className={cn("mr-2 size-4", {
+                      "fill-primary": link.href === pathname,
+                    })}
+                  />{" "}
                   {link.title}
                   {link.label && (
                     <span

@@ -2,7 +2,6 @@
 
 import {
   ArrowRightStartOnRectangleIcon,
-  ChartBarIcon,
   PlusCircleIcon,
   TrophyIcon,
   ViewColumnsIcon,
@@ -12,6 +11,7 @@ import { useRef, useState } from "react"
 import { ImperativePanelHandle } from "react-resizable-panels"
 
 import { Nav } from "@/components/navigation/nav"
+import { Logo } from "@/components/shared/logo"
 import {
   ResizableHandle,
   ResizablePanel,
@@ -28,6 +28,7 @@ export const Sidebar = ({
 }: any) => {
   const [isCollapsed, setIsCollapsed] = useState(defaultCollapsed)
   const leftPanelRef = useRef<ImperativePanelHandle>(null)
+
   return (
     <ResizablePanelGroup direction="horizontal">
       <ResizablePanel
@@ -80,13 +81,7 @@ export const Sidebar = ({
                 "hover:text-primary tw-transition flex items-center gap-x-1 font-serif font-medium uppercase"
               )}
             >
-              {`TIYB`}
-              {/* <MainLogo
-                className={cn(
-                  "hover:stroke-primary tw-transition stroke-white",
-                  isCollapsed ? "size-8" : "px-2"
-                )}
-              /> */}
+              <Logo className="stroke-foreground hover:stroke-primary tw-transition size-8" />
             </Link>
           )}
         </div>
