@@ -104,7 +104,7 @@ export const Sidebar = ({
             {
               title: "Library",
               href: "/library",
-              label: booksCount.toString(),
+              label: booksCount?.toString(),
               icon: ViewColumnsIcon,
               variant: "ghost",
             },

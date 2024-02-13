@@ -41,7 +41,7 @@ export const SignInForm = () => {
       })
 
       if (data?.success) {
-        router.push("/sign-in")
+        router.push("/challenge")
 
         toast({
           title: "Success!",

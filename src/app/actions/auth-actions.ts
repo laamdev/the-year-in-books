@@ -49,7 +49,8 @@ export const signInAction = action(
     revalidatePath("/", "layout")
 
     if (error) {
-      return { error: "Something went wrong, couldn't sign in." }
+      console.log(error.message, "xxx")
+      return { error: error.message }
     } else {
       return { success: "You've been signed in." }
     }
