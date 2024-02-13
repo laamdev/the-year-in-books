@@ -10,26 +10,51 @@ import { SignInFormSchema, SignUpFormSchema } from "@/lib/validation"
 
 const action = createSafeActionClient()
 
-export async function signInAction(formData: FormData) {
-  const cookieStore = cookies()
-  const supabase = createClient(cookieStore)
+// // export async function signInAction(formData: FormData) {
+// //   const cookieStore = cookies()
+// //   const supabase = createClient(cookieStore)
 
-  // type-casting here for convenience
-  // in practice, you should validate your inputs
-  const data = {
-    email: formData.get("email") as string,
-    password: formData.get("password") as string,
+// //   // type-casting here for convenience
+// //   // in practice, you should validate your inputs
+// //   const data = {
+// //     email: formData.get("email") as string,
+// //     password: formData.get("password") as string,
+// //   }
+
+// //   const { error } = await supabase.auth.signInWithPassword(data)
+
+// //   if (error) {
+// //     redirect("/error")
+// //   }
+
+// //   revalidatePath("/", "layout")
+// //   redirect("/")
+// // }
+
+export const signInAction = action(
+  SignInFormSchema,
+  async ({ email, password }) => {
+    const cookieStore = cookies()
+    const supabase = createClient(cookieStore)
+
+    if (!email || !password) {
+      return { error: "Something went wrong, couldn't sign in." }
+    }
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    })
+
+    revalidatePath("/", "layout")
+
+    if (error) {
+      return { error: "Something went wrong, couldn't sign in." }
+    } else {
+      return { success: "You've been signed in." }
+    }
   }
-
-  const { error } = await supabase.auth.signInWithPassword(data)
-
-  if (error) {
-    redirect("/error")
-  }
-
-  revalidatePath("/", "layout")
-  redirect("/")
-}
+)
 
 export const signUpAction = action(
   SignUpFormSchema,

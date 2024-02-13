@@ -7,7 +7,7 @@ import { useAction } from "next-safe-action/hooks"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
-import { signUpAction } from "@/app/actions/auth-actions"
+import { signInAction } from "@/app/actions/auth-actions"
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -20,19 +20,19 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { toast } from "@/components/ui/use-toast"
-import { SignUpFormSchema } from "@/lib/validation"
+import { SignInFormSchema } from "@/lib/validation"
 
 export const SignInForm = () => {
   const router = useRouter()
-  const form = useForm<z.infer<typeof SignUpFormSchema>>({
-    resolver: zodResolver(SignUpFormSchema),
+  const form = useForm<z.infer<typeof SignInFormSchema>>({
+    resolver: zodResolver(SignInFormSchema),
     defaultValues: {
       email: "",
       password: "",
     },
   })
 
-  const { execute, result, status } = useAction(signUpAction, {
+  const { execute, result, status } = useAction(signInAction, {
     onSuccess(data) {
       if (data?.error) console.log(data.error)
       toast({
@@ -62,7 +62,7 @@ export const SignInForm = () => {
     },
   })
 
-  const onSubmit = async (values: z.infer<typeof SignUpFormSchema>) => {
+  const onSubmit = async (values: z.infer<typeof SignInFormSchema>) => {
     execute(values)
   }
 
